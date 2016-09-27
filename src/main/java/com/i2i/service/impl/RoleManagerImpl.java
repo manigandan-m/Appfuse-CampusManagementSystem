@@ -28,7 +28,7 @@ public class RoleManagerImpl extends GenericManagerImpl<Role, Long> implements R
      * {@inheritDoc}
      */
     public List<Role> getRoles() throws DatabaseException {
-    	return (roleDao.retrieveRoles());
+        return roleDao.getRoles();
     }
 
     /**

@@ -1,39 +1,32 @@
 package com.i2i.webapp.controller;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.i2i.exception.DatabaseException;
-import com.i2i.model.Teacher;
-import com.i2i.model.User;
-import com.i2i.service.StudentService;
 import com.i2i.service.TeacherService;
 import com.i2i.service.UserManager;
+import com.i2i.model.Teacher;
+import com.i2i.model.User;
 
-/**
- * Controller to perform add, update, delete, retrieve, retrieve all operations using model class Teacher
- * by invoking TeacherManager class methods.
- * It is used to set views (JSP Pages) for the methods.
- * Assigns handlers (methods) to process the requests
- *   
- * @author Zeeshan Ali
- * 
- * @created 2016-09-07
- * 
- */
 @Controller
-public class TeacherController {
+public class TeacherController  {
     private TeacherService teacherService = null;
     private UserManager userManager = null;
-    
+
     @Autowired
-    public void setTeacherService(TeacherService teacherService) {
+    public void setTeacherManager(TeacherService teacherService) {
         this.teacherService = teacherService;
     }
     
@@ -41,22 +34,23 @@ public class TeacherController {
     public void setUserManager(UserManager userManager) {
         this.userManager = userManager;
     }
-    
+
     /**
      * Gets the teacher details from the JSP Page and passes it as a Teacher.
-     * It gets the userId and invokes the UserManager method to get the corresponding user object.
-     * It invokes the TeacherManager method and sends the user and teacher object for adding teacher details
+     * It gets the userId and invokes the UserService method to get the corresponding user object.
+     * It invokes the TeacherService method and sends the user and teacher object for adding teacher details
      *  
      * @param teacher
      *     a person who teaches in a school.
      * @return
      */
-    @RequestMapping(value = "/addTeacher", method=RequestMethod.GET)
-    public ModelAndView addTeacher(@ModelAttribute("Teacher") Teacher teacher) {
+    @RequestMapping(value = "/addTeacher", method=RequestMethod.POST)
+    public ModelAndView addTeacher(@ModelAttribute("Teacher") Teacher teacher, BindingResult result) {
         String message = null;    
         try {      
-            User user = userManager.getUser(Long.toString(teacher.getUser().getId()));          
-            teacherService.addTeacher(teacher, user);             
+            User user = userManager.getUserById(teacher.getUser().getId());
+            teacher.setUser(user);
+        	teacherService.addTeacher(teacher);                                       
             message = "Teacher is added successfully";            
         } catch (DatabaseException ex) {            
             message = ex.getMessage().toString();                         
@@ -75,7 +69,7 @@ public class TeacherController {
      *     JSP Page where the teacher details can be viewed
      */
     @RequestMapping(value = "/viewTeacher", method=RequestMethod.GET) 
-    public ModelAndView viewTeacher(@RequestParam("teacherId") int teacherId) {               
+    public ModelAndView viewTeacher(@RequestParam("teacherId") int teacherId, BindingResult result) {               
         ModelAndView modelView = new ModelAndView();  
         modelView.setViewName("SearchTeacher");
         try {
@@ -96,7 +90,7 @@ public class TeacherController {
      *     JSP Page where the teacher details can be viewed
      */
     @RequestMapping(value = "/displayTeacher", method=RequestMethod.GET) 
-    public ModelAndView displayTeacher(@RequestParam("teacherId") int teacherId) {               
+    public ModelAndView displayTeacher(@RequestParam("teacherId") int teacherId, BindingResult result) {               
         ModelAndView modelView = new ModelAndView();  
         modelView.setViewName("DisplayTeacher");
         try {
@@ -108,7 +102,7 @@ public class TeacherController {
     }
     
     /**
-     * It displays all the teachers by invoking the TeacherManager class method.
+     * It displays all the teachers by invoking the TeacherService class method.
      * It sends the list of the teachers to the JSP Page by using ModelAndView object
      *  
      * @return
@@ -132,7 +126,7 @@ public class TeacherController {
      *     JSP Page where the user is redirected
      */
     @RequestMapping(value = "/deleteTeacher", method=RequestMethod.GET) 
-    public ModelAndView deleteTeacher(@RequestParam("teacherId") int teacherId) {       
+    public ModelAndView deleteTeacher(@RequestParam("teacherId") int teacherId, BindingResult result) {       
         ModelAndView modelView = new ModelAndView();
         try {                                                          
             teacherService.removeTeacherById(teacherId);
@@ -149,7 +143,7 @@ public class TeacherController {
      *     id of teacher
      */
     @RequestMapping(value="/editTeacherDetails", method=RequestMethod.GET)
-    public String editTeacherDetails(@RequestParam("teacherId") int teacherId, ModelMap map) {
+    public String editTeacherDetails(@RequestParam("teacherId") int teacherId, ModelMap map, BindingResult result) {
     	try {
     	    Teacher teacher = teacherService.getTeacherById(teacherId);
     	    map.addAttribute("teacher",teacher);
@@ -172,7 +166,7 @@ public class TeacherController {
      *     if there is failed or interrupted input output operations.
      */
     @RequestMapping(value = "/editTeacherById", method = RequestMethod.GET)
-    public String editTeacherForm(@RequestParam("teacherId") String id, ModelMap model) {
+    public String editTeacherForm(@RequestParam("teacherId") String id, ModelMap model, BindingResult result) throws ServletException, IOException {
     	 try {
     	     model.addAttribute("Teacher", teacherService.getTeacherById(Integer.parseInt(id)));
              return "EditTeacher";
@@ -185,7 +179,7 @@ public class TeacherController {
     /**
      * <p>
      * Edits the teacher details by sending the teacher details to the assigned JSP page.
-     * Invokes the TeacherManager method to update the changes.
+     * Invokes the TeacherService method to update the changes.
      * </p>
      * 
      * @param teacher
@@ -200,11 +194,9 @@ public class TeacherController {
      *     when a servlet related problem occurs.
      */
     @RequestMapping(value = "/editTeacher", method = RequestMethod.POST)
-    public String editTeacher(@ModelAttribute("Teacher") Teacher teacher, ModelMap message) {  
+    public String editTeacher(@ModelAttribute("Teacher") Teacher teacher, ModelMap message, BindingResult result) {  
         try {
-            //User user = userManager.getUserById(teacher.getUser().getUserId()); 
-            //teacher.setUser(user);
-            teacherService.editTeacher(teacher);      
+        	teacherService.editTeacher(teacher);      
             message.addAttribute("Message", "Teacher Edited Successfully");
             return "EditTeacher";
     	} catch (DatabaseException e) {

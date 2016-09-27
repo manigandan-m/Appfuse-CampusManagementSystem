@@ -15,7 +15,7 @@ public interface RoleManager extends GenericManager<Role, Long> {
     /**
      * {@inheritDoc}
      */
-	public List<Role> getRoles() throws DatabaseException; 
+    List getRoles() throws DatabaseException;
 
     /**
      * {@inheritDoc}

@@ -7,6 +7,7 @@
 <hibernate-configuration>
     <session-factory>
         <mapping class="com.i2i.model.User"/>
+        <mapping class="com.i2i.model.Address"/>
         <mapping class="com.i2i.model.Role"/>
         <mapping class="com.i2i.model.Student"/>
         <mapping class="com.i2i.model.Teacher"/>

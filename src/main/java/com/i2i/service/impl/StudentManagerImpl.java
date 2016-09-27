@@ -1,105 +1,41 @@
 package com.i2i.service.impl;
 
-import java.util.List;
+import com.i2i.dao.StudentDao;
+import com.i2i.exception.DatabaseException;
+import com.i2i.model.Student;
+import com.i2i.service.StudentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
-import com.i2i.dao.StudentDao;
-//import com.i2i.model.Standard;
-import com.i2i.model.Student;
-import com.i2i.service.StudentService;
-//import com.i2i.model.User;
-//import com.i2i.service.UserManager;
-import com.i2i.exception.DatabaseException;
-
-/**
-  * <p>
-  * Service which is used to perform basic create update, retrieve, retrieve all and delete operations
-  * for model Role by invoking StudentDao class methods
-  * </p>
-  * 
-  * @author Zeeshan Ali
-  * 
-  * @created 2016-09-07
-  */
 @Service("studentService")
 public class StudentManagerImpl extends GenericManagerImpl<Student, Long> implements StudentService {
-    private StudentDao studentDao;
-    
+    StudentDao studentDao;
+
     @Autowired
     public StudentManagerImpl(StudentDao studentDao) {
         super(studentDao);
         this.studentDao = studentDao;
     }
-    
-    /**
-     * Calls the StudentDao class method to add the standard to the database by passing the Student class object
-     * 
-     * @param student
-     *     student is a person who is pupil in a school
-     * @throws DatabaseException
-     *     if there is an error in getting the object like NullPointerException,
-     *     NumberFormatException
-     */
-    /*public void addStudent(Student student, User user, Standard standard) throws DatabaseException {                 
-        studentDao.insertStudent(student, user, standard);                     
-    }*/
+
     public void addStudent(Student student) throws DatabaseException {                 
         studentDao.insertStudent(student);                     
     }
-    
-    /**
-     * Returns the student model object by passing the id of student
-     * 
-     * @param id
-     *     id of student
-     * @return
-     *     student
-     * @throws DatabaseException
-     *     if there is an error in getting the object like NullPointerException,
-     *     NumberFormatException
-     */
+
     public Student getStudentById(int id) throws DatabaseException {
         return (studentDao.findStudentById(id));        
     }
-    
-    /**
-     * Invokes the StudentDao class method to delete student using id
-     * 
-     * @param id
-     *     id of the student to delete
-     * @throws DataBaseException
-     *     if there is an error in getting the object like NullPointerException,
-     *     NumberFormatException
-     */
+
     public void removeStudentById(int id) throws DatabaseException {
         studentDao.deleteStudentById(id);  
     }
-    
-    /**
-     * Invokes the studentDao method to edit the student details by passing the Student class object
-     * 
-     * @param student
-     *     student is a person who is pupil in a school
-     * @throws DataBaseException
-     *     if there is an error in getting the object like NullPointerException,
-     *     NumberFormatException
-     */
+
     public void editStudent(Student student) throws DatabaseException {
         studentDao.editStudent(student);
     }
-    
-    /**
-     * Invokes the StudentDao class method to get the list of all of students
-     *  
-     * @return 
-     *     list of students returned
-     * @throws DatabaseException
-     *     if there is an error in getting the object like NullPointerException,
-     *     NumberFormatException
-     */
+
     public List<Student> getStudents() throws DatabaseException {
         return (studentDao.retrieveStudents());
     }

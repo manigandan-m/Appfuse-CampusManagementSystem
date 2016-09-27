@@ -1,5 +1,6 @@
 package com.i2i.service;
 
+import com.i2i.exception.DatabaseException;
 import com.i2i.model.User;
 
 import javax.jws.WebService;
@@ -59,4 +60,6 @@ public interface UserService {
      */
     @DELETE
     void removeUser(String userId);
+
+    User getUserById(Long id) throws DatabaseException;
 }

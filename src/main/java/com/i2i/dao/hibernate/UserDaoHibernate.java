@@ -1,8 +1,12 @@
 package com.i2i.dao.hibernate;
 
 import com.i2i.dao.UserDao;
+import com.i2i.exception.DatabaseException;
 import com.i2i.model.User;
+
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -57,7 +61,6 @@ public class UserDaoHibernate extends GenericDaoHibernate<User, Long> implements
         }
         getSession().saveOrUpdate(user);
         // necessary to throw a DataIntegrityViolation and catch it in UserManager
-        getSession().flush();
         return user;
     }
 
@@ -95,5 +98,28 @@ public class UserDaoHibernate extends GenericDaoHibernate<User, Long> implements
         Table table = AnnotationUtils.findAnnotation(User.class, Table.class);
         return jdbcTemplate.queryForObject(
                 "select password from " + table.name() + " where id=?", String.class, userId);
+    }
+    
+    /**
+     * Retrieves the user by passing userId of the user
+     * 
+     * @param id
+     *     id of the user whose record has to be viewed
+     * @return user
+     *    object of class User
+     * @throws DatabaseException
+     *     if there is an error in getting the object like HibernateException
+     */
+    public User findUserById(Long id) throws DatabaseException {       
+        Session session = getSession();       
+        try {                          
+            User user = (User) session.get(User.class, id);           
+            if (null == user) {
+               throw new DatabaseException("Invalid user Id");
+            }                    
+            return user;
+        } catch (HibernateException e) {
+            throw new DatabaseException("Entered user is not found. Kindly try again with vaild input data", e);
+        }                         
     }
 }

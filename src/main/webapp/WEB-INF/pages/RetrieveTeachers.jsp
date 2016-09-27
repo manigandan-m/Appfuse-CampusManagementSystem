@@ -22,7 +22,7 @@
 			<!-- freshdesignweb top bar -->
             <div class="freshdesignweb-top">
                 <a href="home.html">Home</a>&nbsp;&nbsp;
-                <a href="signup.html">New Teacher Joining</a>
+                <a href="User.html">New Teacher Joining</a>
                 <span class="right">
                     <a href="Logout.html">
                         <strong>Logout</strong>

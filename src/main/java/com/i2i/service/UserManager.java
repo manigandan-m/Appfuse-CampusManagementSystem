@@ -1,6 +1,7 @@
 package com.i2i.service;
 
 import com.i2i.dao.UserDao;
+import com.i2i.exception.DatabaseException;
 import com.i2i.model.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -137,4 +138,19 @@ public interface UserManager extends GenericManager<User, Long> {
      * @throws UserExistsException
      */
     User updatePassword(String username, String currentPassword, String recoveryToken, String newPassword, String applicationUrl) throws UserExistsException;
+
+    /**
+     * 
+     * @param userId
+     * @return
+     * @throws DatabaseException
+     */
+    User getUserById(Long userId) throws DatabaseException;
+    
+    /**
+     * 
+     * @param user
+     * @throws DatabaseException
+     */
+    /*void editUser(User user) throws DatabaseException;*/
 }

@@ -2,6 +2,7 @@ package com.i2i.service.impl;
 
 import org.apache.commons.lang.StringUtils;
 import com.i2i.dao.UserDao;
+import com.i2i.exception.DatabaseException;
 import com.i2i.model.User;
 import com.i2i.service.MailEngine;
 import com.i2i.service.UserExistsException;
@@ -235,7 +236,7 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
         message.setSubject(subject);
 
         final Map<String, Serializable> model = new HashMap<String, Serializable>();
-        //model.put("user", user);
+        model.put("user", user);
         model.put("applicationURL", url);
 
         mailEngine.sendMessage(message, template, model);
@@ -266,5 +267,9 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
         }
         // or throw exception
         return null;
+    }
+    
+    public User getUserById(Long userId) throws DatabaseException {
+    	return userDao.findUserById(userId);
     }
 }

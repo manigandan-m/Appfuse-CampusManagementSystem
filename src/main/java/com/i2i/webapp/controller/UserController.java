@@ -3,16 +3,16 @@ package com.i2i.webapp.controller;
 import com.i2i.Constants;
 import com.i2i.dao.SearchException;
 import com.i2i.exception.DatabaseException;
+import com.i2i.model.Address;
 import com.i2i.model.User;
 import com.i2i.service.RoleManager;
-import com.i2i.service.UserExistsException;
 import com.i2i.service.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,8 +35,13 @@ public class UserController {
     private RoleManager roleManager = null;
 
     @Autowired
-    public void setUserManager(UserManager userManager) {
+    public void setUserService(UserManager userManager) {
         this.userManager = userManager;
+    }
+    
+    @Autowired
+    public void setRoleManager(RoleManager roleManager) {
+        this.roleManager = roleManager;
     }
 
     @RequestMapping(value ="/admin/users*", method = RequestMethod.GET)
@@ -60,13 +65,13 @@ public class UserController {
     @RequestMapping(value = "/User", method=RequestMethod.GET) 
     public String addUser(ModelMap model) {
     	try { 
-            model.addAttribute("User", new User());	
+            model.addAttribute("User", new User());
             model.addAttribute("roleList", roleManager.getRoles());
     	} catch (DatabaseException ex) { 
             model.addAttribute("message", ex.getMessage().toString());                                    
         } 
-        return "signup";
-    }       
+        return "User";
+    }
     
     /**
      * The method gets the user details from the JSP Page and invokes the 
@@ -75,27 +80,18 @@ public class UserController {
      * @param user
      *     user is a person who can be an admin, teacher or a student. It contains all the user details that is sent from the JSP Page
      * @return
+        map
      *     returns the JSP Page called Address
      */
     @RequestMapping(value = "/addUser", method=RequestMethod.POST)
-    public ModelAndView addUser(@ModelAttribute("User") User user) {      
-        ModelAndView modelView = new ModelAndView();        
-        try {                                                     
-            
-            modelView.addObject("roleList", roleManager.getRoles());
-            user.addRole(roleManager.getRole(Constants.USER_STUDENT));
-            userManager.saveUser(user);
-            modelView.setViewName("User"); 
-            
-                        
-        }  catch (UserExistsException ex) {
-            modelView.setViewName("User");            
-            modelView.addObject("message", ex.getMessage().toString());                                   
-        } catch (DatabaseException ex) {
-            modelView.setViewName("User");            
-            modelView.addObject("message", ex.getMessage().toString());                                   
-        }
-        return modelView;       
+    public String addUser(@ModelAttribute("User") User user, BindingResult result, ModelMap map) {      
+    	System.out.println("In user controller:"+user.getId());
+    	System.out.println("In user controller:"+user.getFirstName());
+        map.addAttribute("Address", new Address());
+        userManager.save(user);
+        map.addAttribute("userId",user.getId());
+        System.out.println("In user controller:"+user.getId());
+        return "Address";       
     }    
     
     /**
@@ -106,7 +102,7 @@ public class UserController {
      * @return
      *     returns the JSP Page where user details of a single user can be viewed 
      */
-    @RequestMapping(value = "/searchUser", method=RequestMethod.GET)  
+    /*@RequestMapping(value = "/searchUser", method=RequestMethod.GET)  
     public ModelAndView viewUser(@RequestParam("username") String username) {                
         ModelAndView modelView = new ModelAndView();
         modelView.setViewName("User");
@@ -117,7 +113,7 @@ public class UserController {
             modelView.addObject("searchMessage", e.getMessage());             
         }
         return modelView; 
-    } 
+    }*/ 
     
     /**
      * User details of a user can be viewed by passing the id of the user as a parameter
@@ -128,7 +124,7 @@ public class UserController {
      *     returns the JSP Page where user details of a single user can be viewed 
      */
     /*@RequestMapping(value = "/searchUserById", method=RequestMethod.GET)  
-    public ModelAndView viewUserById(@RequestParam("userId") int userId) {                
+    public ModelAndView viewUserById(@RequestParam("userId") Long userId) {                
         ModelAndView modelView = new ModelAndView();
         modelView.setViewName("User");
         modelView.addObject("User", new User());
@@ -150,7 +146,7 @@ public class UserController {
      * 
      */
     /*@RequestMapping(value = "/editUserById", method = RequestMethod.GET)
-    public String editUserForm(@RequestParam("userId") int id, ModelMap model) {
+    public String editUserForm(@RequestParam("userId") Long id, ModelMap model) {
     	try {
     	    model.addAttribute("User", userManager.getUserById(id));
             model.addAttribute("roleList", roleManager.getRoles());
@@ -197,12 +193,10 @@ public class UserController {
      * @return
      *     returns the list of users and sends to the JSP Page where they can be viewed
      */
-    @RequestMapping(value = "/displayUsers", method=RequestMethod.GET) 
+    /*@RequestMapping(value = "/displayUsers", method=RequestMethod.GET) 
     public ModelAndView displayUsers() {
     	                                                                        
             return new ModelAndView("DisplayUsers","users", userManager.getUsers());                                           
         
-    }
-    
-    
+    }*/
 }

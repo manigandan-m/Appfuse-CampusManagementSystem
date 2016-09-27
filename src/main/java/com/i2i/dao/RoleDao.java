@@ -24,13 +24,5 @@ public interface RoleDao extends GenericDao<Role, Long> {
      */
     void removeRole(String rolename);
     
-    /**
-     * Retrieves  the list of roles from the database
-     * 
-     * @return roles
-     *     List of roles
-     * @throws DatabaseException
-     *     if there is an error in getting the list of roles like HibernateException
-     */
-    public List<Role> retrieveRoles() throws DatabaseException; 
+    List<Role> getRoles() throws DatabaseException;
 }

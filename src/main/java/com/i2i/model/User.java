@@ -7,6 +7,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -17,6 +18,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.Version;
@@ -28,6 +31,8 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
@@ -35,6 +40,7 @@ import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 
 /**
  * This class represents the basic "user" object in AppFuse that allows for authentication
@@ -62,19 +68,27 @@ public class User extends BaseObject implements Serializable, UserDetails {
     private String email;                       // required; unique
     private String phoneNumber;
     private String website;
-    private Address address = new Address();
     private Integer version;
-    private Set<Role> roles = new HashSet<Role>();
     private boolean enabled;
     private boolean accountExpired;
     private boolean accountLocked;
     private boolean credentialsExpired;
+    private Set<Role> roles = new HashSet<Role>();
     private String dateOfBirth;
-    private String gender;
     private String bloodGroup;
     private String nationality;
     private String religion;
-
+    private String gender;
+    
+    private Role role;
+    
+    private Address address;
+    
+    @OneToOne(mappedBy = "user")
+    private Teacher teacher;
+    
+    @OneToOne(mappedBy = "user")
+    private Student student;
     /**
      * Default constructor - creates a new instance with no values set.
      */
@@ -151,6 +165,38 @@ public class User extends BaseObject implements Serializable, UserDetails {
     public String getWebsite() {
         return website;
     }
+    
+    @Column(name="date_of_birth")
+    public String getDateOfBirth() {
+    	return dateOfBirth;
+    }
+    
+    @Column(name="gender")
+    public String getGender() {
+    	return gender;
+    }
+    
+    @Column(name="blood_group")
+    public String getBloodGroup() {
+    	return bloodGroup;
+    }
+    
+    @Column(name="nationality")
+    public String getNationality() {
+    	return nationality;
+    }
+    
+    @Column(name="religion")
+    public String getReligion() {
+    	return religion;
+    }
+    
+    @OneToOne(cascade = CascadeType.PERSIST)   
+    @JoinColumn(name = "role_id")  
+    @LazyCollection(LazyCollectionOption.FALSE)
+    public Role getRole() {
+        return role;
+    }
 
     /**
      * Returns the full name.
@@ -161,9 +207,8 @@ public class User extends BaseObject implements Serializable, UserDetails {
     public String getFullName() {
         return firstName + ' ' + lastName;
     }
-
-    @Embedded
-    @IndexedEmbedded
+    
+    @OneToOne (mappedBy = "user")
     public Address getAddress() {
         return address;
     }
@@ -223,7 +268,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
     public Integer getVersion() {
         return version;
     }
-
+    
     @Column(name = "account_enabled")
     public boolean isEnabled() {
         return enabled;
@@ -257,7 +302,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
         return !isAccountLocked();
     }
 
-    @Column(name = "credentials_expired")
+    @Column(name = "credentials_expired", nullable = false)
     public boolean isCredentialsExpired() {
         return credentialsExpired;
     }
@@ -310,7 +355,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
     public void setWebsite(String website) {
         this.website = website;
     }
-
+    
     public void setAddress(Address address) {
         this.address = address;
     }
@@ -338,7 +383,31 @@ public class User extends BaseObject implements Serializable, UserDetails {
     public void setCredentialsExpired(boolean credentialsExpired) {
         this.credentialsExpired = credentialsExpired;
     }
-
+    
+    public void setReligion(String religion) {
+    	this.religion = religion;
+    }
+    
+    public void setDateOfBirth(String dateOfBirth) {
+    	this.dateOfBirth = dateOfBirth;
+    }
+    
+    public void setGender(String gender) {
+    	this.gender = gender;
+    }
+    
+    public void setNationality(String nationality) {
+    	this.nationality = nationality;
+    }
+    
+    public void setBloodGroup(String bloodGroup) {
+    	this.bloodGroup = bloodGroup;
+    }
+    
+    public void setRole(Role role) {
+        this.role = role;
+    }
+    
     /**
      * {@inheritDoc}
      */
@@ -389,55 +458,5 @@ public class User extends BaseObject implements Serializable, UserDetails {
             sb.append("No Granted Authorities");
         }
         return sb.toString();
-    }
-    
-    @Column(name = "gender")
-    @Field
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    @Column(name = "blood_group")
-    @Field
-    public String getBloodGroup() {
-        return bloodGroup;
-    }
-
-    public void setBloodGroup(String bloodGroup) {
-        this.bloodGroup = bloodGroup;
-    }    
-
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-   
-    @Column(name = "date_of_birth")
-    @Field
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }   
-   
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
-    }
-   
-    @Column(name = "nationality")
-    @Field
-    public String getNationality() {
-        return nationality;
-    }
-   
-    public void setReligion(String religion) {
-        this.religion = religion;
-    }
-   
-    @Column(name = "religion")
-    @Field
-    public String getReligion() {
-        return religion;
     }
 }

@@ -1,42 +1,27 @@
 package com.i2i.dao.hibernate;
 
+import com.i2i.model.Teacher;
+import com.i2i.dao.TeacherDao;
+import com.i2i.exception.DatabaseException;
+
+import org.hibernate.Session;
+import org.hibernate.HibernateException;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.springframework.stereotype.Repository;
-
-import com.i2i.dao.TeacherDao;
-import com.i2i.exception.DatabaseException;
-import com.i2i.model.Student;
-import com.i2i.model.Teacher;
-import com.i2i.model.User;
-
-/**
- * <p>
- * DataAccessObject(Dao) which is used to perform create, retrieve, retrieve all, delete operations for model Teacher
- * Creates session and transaction objects for each operation 
- * </p>
- * 
- * @author Zeeshan
- * 
- * @created 2016-09-07
- */
-@Transactional
 @Repository("teacherDao")
-public class TeacherDaoHiberante extends GenericDaoHibernate<Teacher, Long> implements TeacherDao {
-    
-	/**
-     * Constructor that sets the entity to User.class.
+@Transactional
+public class TeacherDaoHibernate extends GenericDaoHibernate<Teacher, Long> implements TeacherDao {
+    /**
+     * Constructor to create a Generics-based version using Teacher as the entity
      */
-    public TeacherDaoHiberante() {
+    public TeacherDaoHibernate() {
         super(Teacher.class);
     }
-    
+
     /**
      * Saves the teacher to the database by passing it
      * 
@@ -46,15 +31,14 @@ public class TeacherDaoHiberante extends GenericDaoHibernate<Teacher, Long> impl
      *     if there is an error in getting the object like HibernateException
      *     
      */
-    public void insertTeacher(Teacher teacher, User user) throws DatabaseException {
+    public void insertTeacher(Teacher teacher) throws DatabaseException {
         Session session = getSession();
-        
         try {           
-            session.save(teacher);                  
+            session.save(teacher);           
         } catch (HibernateException e) {
             throw new DatabaseException("Entered teacher is not added. Teacher ID already exits..", e);
-        }                                                                      
-    }	
+        }                                                                        
+    }
         
     /**
      * Retrieves the teacher by passing id of the teacher
@@ -76,7 +60,7 @@ public class TeacherDaoHiberante extends GenericDaoHibernate<Teacher, Long> impl
             return teacher;
         } catch (HibernateException e) { 
                 throw new DatabaseException("Entered teacher is not found. Kindly try again with vaild input data", e);
-        }                        
+        }                          
     }
 
     /**
@@ -89,13 +73,12 @@ public class TeacherDaoHiberante extends GenericDaoHibernate<Teacher, Long> impl
      */
     public void deleteTeacherById(int id) throws DatabaseException {
         Session session = getSession();
-        Transaction transaction = session.beginTransaction();
         try {
             Teacher teacher = (Teacher) session.get(Teacher.class, id); 
-            session.delete(teacher);                       
+            session.delete(teacher);
         } catch (IllegalArgumentException e) {                       
               throw new DatabaseException("Entered teacher is not deleted. Kindly try again with vaild student id", e);
-        }                         
+        }                            
     }
         
     /**
@@ -109,12 +92,11 @@ public class TeacherDaoHiberante extends GenericDaoHibernate<Teacher, Long> impl
      */
     public void editTeacher(Teacher teacher) throws DatabaseException {
         Session session = getSession();
-        Transaction transaction = session.beginTransaction();
         try {
-            session.update(teacher);                                                                  
+            session.update(teacher);
         } catch (HibernateException e) {
               throw new DatabaseException("Please check the data you have given..." , e);  
-        } 
+        }
     }
         
     /**
@@ -133,8 +115,8 @@ public class TeacherDaoHiberante extends GenericDaoHibernate<Teacher, Long> impl
                 throw new DatabaseException("The teacher list is empty");
             }            
             return teachers;              
-        } catch (HibernateException e) {            
-              throw new DatabaseException("The teachers are not viewed. Kindly try again with vaild input data", e);
-        }                     
+        } catch (HibernateException e) {
+            throw new DatabaseException("The teachers are not viewed. Kindly try again with vaild input data", e);
+        }                      
     }   
 }

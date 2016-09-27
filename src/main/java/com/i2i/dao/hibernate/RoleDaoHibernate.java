@@ -50,17 +50,9 @@ public class RoleDaoHibernate extends GenericDaoHibernate<Role, Long> implements
         session.delete(role);
     }
     
-    /**
-     * Retrieves  the list of roles from the database
-     * 
-     * @return roles
-     *     List of roles
-     * @throws DatabaseException
-     *     if there is an error in getting the list of roles like HibernateException
-     */
-    public List<Role> retrieveRoles() throws DatabaseException {
-        Session session = getSession();        
-        try {
+    public List<Role> getRoles() throws DatabaseException {
+        Session session = getSession();
+    	try {
             List<Role> roles = session.createQuery("FROM Role").list();
             if (roles.isEmpty()) {
                 throw new DatabaseException("The role list is empty");
@@ -68,8 +60,6 @@ public class RoleDaoHibernate extends GenericDaoHibernate<Role, Long> implements
             return roles;              
         } catch (HibernateException e) {            
             throw new DatabaseException("The roles are not viewed. Kindly try again with vaild input data", e);
-        } finally {
-            session.close();
         }                      
     }
 }

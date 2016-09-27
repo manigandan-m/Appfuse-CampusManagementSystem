@@ -52,7 +52,7 @@ public class Teacher {
     String designation;
     
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id") 
+    @JoinColumn(name = "id") 
     @LazyCollection(LazyCollectionOption.FALSE)
     private User user;    
     

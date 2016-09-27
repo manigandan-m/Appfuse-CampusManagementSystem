@@ -3,6 +3,7 @@ package com.i2i.webapp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,10 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.i2i.exception.DatabaseException;
 import com.i2i.service.StudentService;
-import com.i2i.service.StandardService;
 import com.i2i.service.UserManager;
-import com.i2i.service.UserService;
-//import com.i2i.model.Standard;
 import com.i2i.model.Student;
 import com.i2i.model.User;
 
@@ -31,12 +29,11 @@ import com.i2i.model.User;
  */
 @Controller
 public class StudentController  {
-	private StudentService studentService;
-    private UserManager userManager;
-    private StandardService standardService;
-    
+    private StudentService studentService = null;
+    private UserManager userManager = null;
+
     @Autowired
-    public void setStudentService(StudentService studentService) {
+    public void setStudentManager(StudentService studentService) {
         this.studentService = studentService;
     }
     
@@ -44,12 +41,7 @@ public class StudentController  {
     public void setUserManager(UserManager userManager) {
         this.userManager = userManager;
     }
-    
-    @Autowired
-    public void setStandardService(StandardService standardService) {
-        this.standardService = standardService;
-    }
-    
+
     /**
      * Gets the student details from the JSP Page and passes it as student.
      * It gets the userId and invokes the UserService method to get the corresponding user.
@@ -60,15 +52,16 @@ public class StudentController  {
      * @return
      */
     @RequestMapping(value = "/addStudent", method=RequestMethod.GET) 
-    public ModelAndView addStudent(@ModelAttribute("Student") Student student) {
+    public ModelAndView addStudent(@ModelAttribute("Student") Student student, BindingResult result) {
         String message = null;    
-        try {        	
-            /*User user = userService.getUserById(student.getUser().getUserId());
-            Standard standard = standardService.getStandardById(student.getStandard().getStandardId());
-            studentService.addStudent(student, user, standard);*/
-            studentService.addStudent(student); 
+        try {
+        	System.out.println("In student controller:"+ student.getUser().getId());
+        	User user = userManager.getUserById(student.getUser().getId());
+        	student.setUser(user);
+        	studentService.addStudent(student);                                        
             message = "Student is added successfully";            
-        } catch (DatabaseException ex) {        	
+        } catch (DatabaseException ex) {
+        	ex.printStackTrace();
             message = ex.getMessage().toString();                         
         } 
         return new ModelAndView("AddStudent","addMessage", message);       
@@ -84,7 +77,7 @@ public class StudentController  {
      *     JSP Page where the student details can be viewed
      */
     @RequestMapping(value = "/viewStudent", method=RequestMethod.GET) 
-    public ModelAndView viewStudent(@RequestParam("rollNumber") int studentId) {               
+    public ModelAndView viewStudent(@RequestParam("rollNumber") int studentId, BindingResult result) {               
         ModelAndView modelView = new ModelAndView();  
         modelView.setViewName("SearchStudent");
         try {          
@@ -105,7 +98,7 @@ public class StudentController  {
      *     JSP Page where the student details can be viewed
      */
     @RequestMapping(value = "/displayStudent", method=RequestMethod.GET) 
-    public ModelAndView displayStudent(@RequestParam("rollNumber") int studentId) {               
+    public ModelAndView displayStudent(@RequestParam("rollNumber") int studentId, BindingResult result) {               
         ModelAndView modelView = new ModelAndView();  
         modelView.setViewName("DisplayStudent");
         try {          
@@ -141,10 +134,10 @@ public class StudentController  {
      *     JSP Page where the user is redirected
      */
     @RequestMapping(value = "/deleteStudent", method=RequestMethod.GET)
-    public ModelAndView deleteStudent(@RequestParam("rollNumber") int studentId) {       
+    public ModelAndView deleteStudent(@RequestParam("rollNumber") int studentId, BindingResult result) {       
         ModelAndView modelView = new ModelAndView();
         try {                                                          
-            studentService.removeStudentById(studentId);
+        	studentService.removeStudentById(studentId);
         } catch (DatabaseException e) {
             modelView.addObject("deleteMessage", e.getMessage());                                   
         }
@@ -162,7 +155,7 @@ public class StudentController  {
      * @return
      */
     @RequestMapping(value="/editStudentDetails", method=RequestMethod.GET)
-    public String editTeacherDetails(@RequestParam("rollNumber") int studentId, ModelMap map) {
+    public String editTeacherDetails(@RequestParam("rollNumber") int studentId, ModelMap map, BindingResult result) {
     	try {
     	    Student student = studentService.getStudentById(studentId);    	    
     	    map.addAttribute("student",student);
@@ -185,11 +178,10 @@ public class StudentController  {
      *     if there is failed or interrupted input output operations.
      */
     @RequestMapping(value = "/editStudentById", method = RequestMethod.GET)
-    public String editStudentForm(@RequestParam("rollNumber") int rollNumber, ModelMap model) {
+    public String editStudentForm(@RequestParam("rollNumber") int rollNumber, ModelMap model, BindingResult result) {
     	try {
     	    model.addAttribute("Student", studentService.getStudentById(rollNumber));
-    	    //model.addAttribute("standards", standardService.getStandards());
-            return "EditStudent";
+    	    return "EditStudent";
     	} catch (DatabaseException e) {
     	    model.addAttribute("Message", e.getMessage().toString());
     	    return "EditStudent";
@@ -214,13 +206,9 @@ public class StudentController  {
      *     when a servlet related problem occurs.
      */
     @RequestMapping(value = "/editStudent", method = RequestMethod.POST)
-    public String editStudent(@ModelAttribute("Student") Student student, ModelMap message) {  
+    public String editStudent(@ModelAttribute("Student") Student student, ModelMap message, BindingResult result) {  
         try {
-            /*User user = userService.getUserById(student.getUser().getUserId());
-            Standard standard = standardService.getStandardById(student.getStandard().getStandardId());
-            student.setUser(user);
-            student.setStandard(standard);*/
-            studentService.editStudent(student);      
+        	studentService.editStudent(student);      
             message.addAttribute("Message", "Student Edited Successfully");
             return "EditStudent";
     	} catch (DatabaseException e) {

@@ -1,89 +1,39 @@
-<%@ include file="/common/taglibs.jsp" %>
- 
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Campus Management</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-    <link rel="stylesheet" type="text/css" href="css/style2.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="css/demo.css" media="all" />
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
-<div class="container">
-			<!-- freshdesignweb top bar -->
-            <div class="freshdesignweb-top">
-                <a href="home.html">Home</a>&nbsp;&nbsp;
-                <a href="displayStudents">Students</a>
-                <span class="right">
-                    <a href="Logout.html">
-                        <strong>Logout</strong>
-                    </a>
-                </span>
-                <div class="clr"></div>
-            </div><!--/ freshdesignweb top bar -->
-			<header>
-				<h1>Add student</h1>
-            </header>       
-      <div  class="form">
-    		<form:form id="contactform" action="addStudent.html" method="GET" modelAttribute="Student"> 
-    			<p class="contact"><label for="fatherFirstName" path = "label1">Father First Name</label></p> 
-    			<form:input path="fatherFirstName" placeholder="Father First Name" data-validation="custom" data-validation-regexp="^([A-Za-z\s]+)$" data-validation-error-msg = "Enter alphabets only" required = "required" tabindex="1" type="text"/>
-
-                        <p class="contact"><label for="fatherLastName" path = "label1">Father Last Name</label><p> 
-    			<form:input path="fatherLastName" placeholder="Father Last Name" data-validation="custom" data-validation-regexp="^([A-Za-z\s]+)$" data-validation-error-msg = "Enter alphabets only" required = "required" tabindex="1" type="text"/>
-
-                        <p class="contact"><label for="motherFirstName" path = "label1">Mother First Name</label><p> 
-    			<form:input path="motherFirstName" placeholder="Mother First Name" data-validation="custom" data-validation-regexp="^([A-Za-z\s]+)$" data-validation-error-msg = "Enter alphabets only" required = "required" tabindex="1" type="text"/>
-
-                        <p class="contact"><label for="motherLastName" path = "label1">Mother Last Name</label></p> 
-    			<form:input path="motherLastName" placeholder="Mother Last Name" data-validation="custom" data-validation-regexp="^([A-Za-z\s]+)$" data-validation-error-msg = "Enter alphabets only" required = "required" tabindex="1" type="text"/>
-                        
-                        <p class="contact"><label for="familyIncome" path = "label1">Annual Income</label><p> 
-    			<form:input path="familyIncome" placeholder="Annual Income" maxlength="6" title= "Salary should not be more than 999999" required="required" tabindex="1" type="text"/>  
-    			 
-    			<p class="contact"><label for="dateOfAdmission" path = "label1">Date Of Admission(YYYY-MM-DD)</label></p> 
-    			<form:input path="dateOfAdmission" id="datepicker" placeholder="Date Of Admission" required="" tabindex="1" type="text"/>
-
-                        <form:select class="select-style gender" name="admissionCategory" path="admissionCategory">
-                        <option value="select">Admission Category</option>
-                        <option value="General">General</option>
-                        <option value="OBC">OBC</option>
-                        <option value="SC">SC</option>
-                        <option value="ST">ST</option>
-                        </form:select><br><br> 
-                        
-                        
-                        
-                       <input class="buttom" name="submit" id="submit" tabindex="5" value="Submit" type="submit"> 	 
-                </form:form>
-   <c:if test="${null != addMessage}">
+<form:form id="contactform" action="addStudent.html" method="GET" modelAttribute="Student">
+<label>Father First Name</label>
+<form:input path="fatherFirstName" placeholder="Father First Name" type="text"/>
+<label>Father Last Name</label>
+<form:input path="fatherLastName" placeholder="Father Last Name" type="text"/>
+<label></label>
+<form:input path="motherFirstName" placeholder="Mother First Name" type="text"/>
+<label></label>
+<form:input path="motherLastName" placeholder="Mother Last Name" type="text"/>
+<label>Family Income</label>
+<form:input path="familyIncome" placeholder="Annual Income" type="text"/>
+<label>Date Of Admission</label>
+<form:input path="dateOfAdmission" placeholder="Date Of Admission" type="text"/>
+<form:select name="admissionCategory" path="admissionCategory">
+          <option value="select">Admission Category</option>
+          <option value="General">General</option>
+          <option value="OBC">OBC</option>
+          <option value="SC">SC</option>
+          <option value="ST">ST</option>
+</form:select><br><br>
+<form:input type = "hidden" path = "user.id" value="${userId}"/>
+<input name="submit" id="'submit" value="Submit" type="submit">
+</form:form>
+<c:if test="${null != addMessage}">
                     <c:out value="${addMessage}"/>
-                 </c:if> 
-</div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
-   <script>
-       $.validate({
-       lang: 'en'
-        });
-   </script>
-
-<script>
-  $(document).ready(function() {
-	  var date = new Date(2012-09-10);
-	$("#datepicker").datepicker({
-    	minDate: new Date(date),	
-        dateFormat:'yy-mm-dd',
-        changeYear:true,
-        yearRange:'1980:2100'
-        
-    });
-  });
-  </script>  
+                 </c:if>
 </body>
 </html>
