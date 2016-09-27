@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.i2i.service.impl.UserManagerImplTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.699 sec - in com.i2i.service.impl.UserManagerImplTest
