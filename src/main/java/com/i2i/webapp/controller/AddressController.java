@@ -96,15 +96,16 @@ public class AddressController  {
                 map.addAttribute("message", "Admin is created successfully");      
             }
         } catch (DatabaseException ex) {
-        	ex.printStackTrace();
             map.addAttribute("message", ex.getMessage().toString());  
         }
         return "Address";
     }
     
     /**
+     * <p>
      * It displays all the addresses by invoking the AddressService class method.
      * It sends the list of the address to the JSP Page by using ModelAndView object
+     * </p>
      *  
      * @return
      *     returns the JSP Page where all the addresses are displayed
@@ -119,8 +120,10 @@ public class AddressController  {
     }
     
     /**
+     * <p>
      * It provides the page where the user can edit the address details. It calls the AddressService method 
      * to get the address object and passes it to the JSP Page
+     * </p>
      *  
      * @param id
      *     id of address whose details has to be edited
@@ -162,9 +165,9 @@ public class AddressController  {
     @RequestMapping(value = "/editAddress", method = RequestMethod.POST)
     public String editAddress(@ModelAttribute("Address") Address address, BindingResult result, ModelMap message) {  
         try {
-        	User user = userManager.getUserById(address.getUser().getId());
+            User user = userManager.getUserById(address.getUser().getId());
             address.setUser(user);
-        	addressManager.editAddress(address);      
+            addressManager.editAddress(address);      
             message.addAttribute("Message", "Address Edited Successfully");
             return "EditAddress";
         } catch (DatabaseException e) {
@@ -172,5 +175,4 @@ public class AddressController  {
             return "EditAddress";
         }
     }
-
 }

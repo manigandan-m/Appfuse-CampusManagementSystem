@@ -51,8 +51,10 @@ public class SubjectManagerImpl extends GenericManagerImpl<Subject, Long> implem
     }
     
     /**
+     * <p>
      * Invokes the SubjectDao class method to get subject using subjectCode of the subject
      * Returns the subject
+     * </p>
      * 
      * @param subjectCode
      *     code of the subject
@@ -67,8 +69,10 @@ public class SubjectManagerImpl extends GenericManagerImpl<Subject, Long> implem
     }
     
     /**
+     * <p>
      * Invokes the SubjectDao class method to get subject model object using teacherId
      * Returns the subject model object
+     * </p>
      * 
      * @param teacherId
      *     id of teacher
@@ -83,7 +87,9 @@ public class SubjectManagerImpl extends GenericManagerImpl<Subject, Long> implem
     }
     
     /**
+     * <p>
      * Invokes the SubjectDao class method to delete subject using subjectCode
+     * </p>
      * 
      * @param subjectCode
      *     subjectCode of the subject to delete
@@ -96,7 +102,9 @@ public class SubjectManagerImpl extends GenericManagerImpl<Subject, Long> implem
     }
     
     /**
+     * <p>
      * Invokes the SubjectDao method to edit the subject details by passing the subject
+     * </p>
      * 
      * @param subject
      *     subject is a branch of knowledge that is taught to students
@@ -109,8 +117,9 @@ public class SubjectManagerImpl extends GenericManagerImpl<Subject, Long> implem
     }
     
     /**
+     * <p>
      * Invokes the SubjectDao class method to get the list of all of subjects 
-     * 
+     * </p>
      * @return
      *     returns the list of subjects
      * @throws DatabaseException

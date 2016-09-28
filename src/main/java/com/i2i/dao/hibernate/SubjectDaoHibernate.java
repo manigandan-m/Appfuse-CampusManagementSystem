@@ -31,7 +31,7 @@ import com.i2i.model.Teacher;
 @Transactional
 public class SubjectDaoHibernate extends GenericDaoHibernate<Subject, Long> implements SubjectDao {
     
-	/**
+    /**
      * Constructor that sets the entity to User.class.
      */
     public SubjectDaoHibernate() {
@@ -39,7 +39,9 @@ public class SubjectDaoHibernate extends GenericDaoHibernate<Subject, Long> impl
     }
     
     /**
+     * <p>
      * Saves the subject model object to the database by passing the Subject
+     * </p>
      * 
      * @param subject
      *     subject is a branch of knowledge taught to students in a standard
@@ -50,7 +52,6 @@ public class SubjectDaoHibernate extends GenericDaoHibernate<Subject, Long> impl
      */
     public void insertSubject(Subject subject) throws DatabaseException {
         Session session = getSession();
-        
         try {                          
             session.save(subject);                   
         } catch (HibernateException e) {   
@@ -59,7 +60,9 @@ public class SubjectDaoHibernate extends GenericDaoHibernate<Subject, Long> impl
     }
     
     /**
+     * <p>
      * Retrieves the subject object by passing subject code of the subject
+     * </p>
      * 
      * @param subjectCode
      *     code of the subject whose record has to be viewed
@@ -71,7 +74,6 @@ public class SubjectDaoHibernate extends GenericDaoHibernate<Subject, Long> impl
      */
     public Subject findSubjectBySubjectCode(String subjectCode) throws DatabaseException {        
         Session session = getSession();  
-        
         try {                           
             Subject subject = (Subject) session.get(Subject.class, subjectCode);            
             if (null == subject) {
@@ -84,7 +86,9 @@ public class SubjectDaoHibernate extends GenericDaoHibernate<Subject, Long> impl
     }
     
     /**
+     * <p>
      * Retrieves the subject object by passing subject code of the subject
+     * </p>
      * 
      * @param teacher id
      *     id of teacher whose record has to be viewed
@@ -96,7 +100,6 @@ public class SubjectDaoHibernate extends GenericDaoHibernate<Subject, Long> impl
      */
     public Subject findSubjectByTeacherId(int teacherId) throws DatabaseException {        
         Session session = getSession();
-        
         try {
             List<Subject> subjects = session.createQuery("FROM Subject where teacher_id= '"+teacherId+"'").list();
             return subjects.get(0);
@@ -106,7 +109,10 @@ public class SubjectDaoHibernate extends GenericDaoHibernate<Subject, Long> impl
     }
     
     /**
-     * Deletes the subject model object by passing subjectcode 
+     * <p>
+     * Deletes the subject model object by passing subjectcode
+     * </p>
+     *  
      * @param subjectCode
      *     code of the subject
      * @throws DataBaseException
@@ -115,7 +121,6 @@ public class SubjectDaoHibernate extends GenericDaoHibernate<Subject, Long> impl
      */
     public void deleteSubjectBySubjectCode(String subjectCode) throws DatabaseException {
         Session session = getSession();
-        
         try {
             Subject subject = (Subject) session.get(Subject.class, subjectCode); 
             session.delete(subject);           
@@ -125,7 +130,9 @@ public class SubjectDaoHibernate extends GenericDaoHibernate<Subject, Long> impl
     }
     
     /**
+     * <p>
      * Edits the subject details by accessing the database, passing the Subject class object.
+     * </p>
      * 
      * @param subject
      *     object of Subject class to edit
@@ -135,7 +142,6 @@ public class SubjectDaoHibernate extends GenericDaoHibernate<Subject, Long> impl
      */
     public void editSubject(Subject subject) throws DatabaseException {
         Session session = getSession();
-        
         try {
             session.update(subject);                                                                               
         } catch (HibernateException e) {
@@ -144,7 +150,9 @@ public class SubjectDaoHibernate extends GenericDaoHibernate<Subject, Long> impl
     }
     
     /**
+     * <p>
      * Retrieves  the list of subjects from the database
+     * </p>
      * 
      * @return subjects
      *     List of subjects
@@ -154,7 +162,6 @@ public class SubjectDaoHibernate extends GenericDaoHibernate<Subject, Long> impl
      */
     public List<Subject> retrieveSubjects() throws DatabaseException {
         Session session = getSession();
-        
         try {
             List<Subject> subjects = session.createQuery("FROM Subject").list();
             if (subjects.isEmpty()) {
@@ -167,7 +174,9 @@ public class SubjectDaoHibernate extends GenericDaoHibernate<Subject, Long> impl
     }
     
     /**
+     * <p>
      * The method is used to assign a teacher to a subject by passing the objects of Subject and Teacher class
+     * </p>
      * 
      * @param subject
      *     object of class Subject
@@ -179,7 +188,6 @@ public class SubjectDaoHibernate extends GenericDaoHibernate<Subject, Long> impl
      */
     public void updateSubjectByTeacher(Subject subject, Teacher teacher) throws DatabaseException {
         Session session = getSession();
-        
         try {
             subject.setTeacher(teacher);            
             session.update(subject);                                                                              

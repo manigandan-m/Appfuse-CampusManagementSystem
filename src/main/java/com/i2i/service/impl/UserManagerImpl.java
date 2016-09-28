@@ -246,16 +246,15 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
      * {@inheritDoc}
      */
     @Override
-    public User updatePassword(final String username, final String currentPassword, final String recoveryToken, final String newPassword, final String applicationUrl) throws UserExistsException {
+    public User updatePassword(final String username, final String currentPassword, final String recoveryToken, 
+                               final String newPassword, final String applicationUrl) throws UserExistsException {
         User user = getUserByUsername(username);
         if (isRecoveryTokenValid(user, recoveryToken)) {
             log.debug("Updating password from recovery token for user: " + username);
             user.setPassword(newPassword);
             user = saveUser(user);
             passwordTokenManager.invalidateRecoveryToken(user, recoveryToken);
-
             sendUserEmail(user, passwordUpdatedTemplate, applicationUrl, "Password Updated");
-
             return user;
         } else if (StringUtils.isNotBlank(currentPassword)) {
             if (passwordEncoder.matches(currentPassword, user.getPassword())) {
@@ -269,13 +268,19 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
         return null;
     }
     
+    /**
+     * <p>
+     * Gets the user by passing its id and accessing the database
+     * </p>
+     */
     public User getUserById(Long userId) throws DatabaseException {
     	return userDao.findUserById(userId);
     }
     
     /**
+     * <p>
      * Invokes the userDao method to edit the user details by passing the User class object
-     * 
+     * </p>
      * @param user
      *     user whose details have to be edited
      * @throws DataBaseException

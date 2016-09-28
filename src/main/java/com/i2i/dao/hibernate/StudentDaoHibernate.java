@@ -22,6 +22,11 @@ public class StudentDaoHibernate extends GenericDaoHibernate<Student, Long> impl
         super(Student.class);
     }
 
+    /**
+     * <p>
+     * Gets the student details by passing the id of the student
+     * </p>
+     */
     public Student findStudentById(int id) throws DatabaseException {
         try {
             Session session = getSession();                           
@@ -34,7 +39,12 @@ public class StudentDaoHibernate extends GenericDaoHibernate<Student, Long> impl
             throw new DatabaseException("Entered student is not found. Kindly try again with vaild input data", e);
         }
     }
-
+    
+    /**
+     * <p>
+     * deletes the student details from the database by passing the id of the student
+     * </p>
+     */
     public void deleteStudentById(int id) throws DatabaseException {
         try {
             Session session = getSession(); 
@@ -44,7 +54,12 @@ public class StudentDaoHibernate extends GenericDaoHibernate<Student, Long> impl
             throw new DatabaseException("Entered student is not deleted. Kindly try again with vaild student id", e);
         }                            
     }
-
+    
+    /**
+     * <p>
+     * adds the student details in the database
+     * </p>
+     */
     public void insertStudent(Student student) throws DatabaseException {
         Session session = getSession();
         try {
@@ -55,6 +70,11 @@ public class StudentDaoHibernate extends GenericDaoHibernate<Student, Long> impl
         }                                                                         
     }
 
+    /**
+     * <p>
+     * Retrieves the list of students from the database
+     * </p>
+     */
     public List<Student> retrieveStudents() throws DatabaseException {
         Session session = getSession();        
         try {
@@ -67,7 +87,12 @@ public class StudentDaoHibernate extends GenericDaoHibernate<Student, Long> impl
             throw new DatabaseException("The students are not viewed. Kindly try again with vaild input data", e);
         }                      
     }
-
+    
+    /**
+     * <p>
+     * Edits the student details and updates the database
+     * </p>
+     */
     public void editStudent(Student student) throws DatabaseException {
 	Session session = getSession();
         try {

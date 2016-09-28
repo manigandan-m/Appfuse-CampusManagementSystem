@@ -80,7 +80,6 @@ public class PeriodSubjectDetailController {
     public ModelAndView generateTimeTable(@RequestParam("standardId") int standardId) {
         ModelAndView modelView = new ModelAndView();  
         modelView.setViewName("TimeTable");
-        
         try {
             periodSubjectDetailService.generateTimeTable(standardId);            
         } catch (DatabaseException e) {

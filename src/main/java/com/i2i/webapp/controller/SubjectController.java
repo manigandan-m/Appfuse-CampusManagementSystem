@@ -13,7 +13,6 @@ import com.i2i.exception.DatabaseException;
 import com.i2i.service.StandardService;
 import com.i2i.service.SubjectService;
 import com.i2i.service.TeacherService;
-import com.i2i.service.UserManager;
 import com.i2i.model.Subject;
 
 /**
@@ -48,8 +47,11 @@ public class SubjectController {
     }
     
     /**
+     * <p>
      * It is used to send the subject and the lists of the standards and teachers to a JSP Page where
-     * user can add the details of the subject  
+     * user can add the details of the subject
+     * </p>
+     *   
      * @param model
      *     used to send the subject model object and the lists of standards and teachers
      * @return
@@ -57,7 +59,7 @@ public class SubjectController {
      */
     @RequestMapping(value = "/Subject", method=RequestMethod.GET) 
     public String Subjects(ModelMap model) {
-    	try { 
+        try { 
             model.addAttribute("subjects", subjectService.getSubjects());
     	}  catch (DatabaseException ex) {            
             model.addAttribute("message", ex.getMessage().toString()); 
@@ -66,8 +68,10 @@ public class SubjectController {
     }       
     
     /**
+     * <p>
      * The method gets the subject details from the JSP Page and invokes the 
      * SubjectService class method and sends the details as Subject
+     * </p>
      * 
      * @param subject
      *     a branch of knowledge studied or taught in a school
@@ -87,8 +91,10 @@ public class SubjectController {
     }
 
     /**
+     * <p>
      * Used to find the details of a subject by getting the subject code. It passes
-     *  subject to the JSP Page where the subject details can be viewed
+     * subject to the JSP Page where the subject details can be viewed
+     * </p>
      *   
      * @param subjectCode
      *     code of the subject
@@ -109,7 +115,9 @@ public class SubjectController {
     }
 
     /**
+     * <p>
      * Deletes the subject record by passing the code of the subject
+     * </p>
      * 
      * @param subjectCode
      *     code of the subject whose record has to be deleted
@@ -131,8 +139,10 @@ public class SubjectController {
     }
     
     /**
+     * <p>
      * This method is used to assign a teacher to a subject. It is done by passing the id of subject
      * It also sends the list of teachers by invoking the TeacherService method and also the Subject
+     * </p>
      *  
      * @param subjectId
      *     code of the subject
@@ -152,7 +162,9 @@ public class SubjectController {
     }    
     
     /**
+     * <p>
      * Allots the teacher to the subject by invoking the SubjectService class method and passing the Subject 
+     * </p>
      * 
      * @param subject
      *     object of class Subject

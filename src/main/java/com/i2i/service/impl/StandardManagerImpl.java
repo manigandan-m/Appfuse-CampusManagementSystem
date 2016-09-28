@@ -34,7 +34,9 @@ public class StandardManagerImpl extends GenericManagerImpl<Standard, Long> impl
     }
     
     /**
+     * <p>
      * Calls the StandardDao class method to add the standard to the database by passing the Standard class object
+     * </p>
      * 
      * @param standard
      *     Standard is a class where students study
@@ -60,7 +62,9 @@ public class StandardManagerImpl extends GenericManagerImpl<Standard, Long> impl
     }
     
     /**
+     * <p>
      * Invokes the StandardDao class method to delete standard using id
+     * </p>
      * 
      * @param id
      *     id of the standard to delete
@@ -73,7 +77,9 @@ public class StandardManagerImpl extends GenericManagerImpl<Standard, Long> impl
     }
     
     /**
+     * <p>
      * Invokes the standardDao method to edit the standard details by passing the standard
+     * </p>
      * 
      * @param standard
      *     a grade in which a group of students study
@@ -87,7 +93,9 @@ public class StandardManagerImpl extends GenericManagerImpl<Standard, Long> impl
     }
     
     /**
+     * <p>
      * Returns the standard model object by passing the id of standard
+     * </p>
      * 
      * @param id
      *     id of standard

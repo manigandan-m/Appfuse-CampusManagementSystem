@@ -6,8 +6,6 @@ import javax.transaction.Transactional;
 
 import java.util.ArrayList;
 import org.hibernate.Session;  
-import org.hibernate.SessionFactory;  
-import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 import org.hibernate.HibernateException;
 
@@ -39,7 +37,9 @@ public class PeriodSubjectDetailDaoHibernate extends GenericDaoHibernate<PeriodS
     }
     
     /**
+     * <p>
      * Saves the periods of time table in the form of PeriodSubjectDetail
+     * </p>
      * 
      * @param periodSubjectDetail
      *     PeriodSubjectDetail holds the period of time table
@@ -50,7 +50,6 @@ public class PeriodSubjectDetailDaoHibernate extends GenericDaoHibernate<PeriodS
      */       
     public void insertPeriodSubjectDetail(PeriodSubjectDetail periodSubjectDetail) throws DatabaseException {
         Session session = getSession();
-        
         try {             
             session.save(periodSubjectDetail);                        
         } catch (HibernateException e) {   
@@ -59,8 +58,9 @@ public class PeriodSubjectDetailDaoHibernate extends GenericDaoHibernate<PeriodS
     }  
      
     /**
+     * <p>
      * Retrieves  the list of periodsubjectdetails by standard id from the database
-     *
+     * </p>
      * @param standardId
      *     standard id whose period details have to be retrieved
      * @return periodSubjectDetails
@@ -84,8 +84,9 @@ public class PeriodSubjectDetailDaoHibernate extends GenericDaoHibernate<PeriodS
     }
      
     /**
+     * <p>
      * Retrieves  the list of periodsubjectdetails by teacher id from the database
-     *
+     * </p>
      * @param teacherId
      *     teacher id whose period details have to be retrieved
      * @return periodSubjectDetails

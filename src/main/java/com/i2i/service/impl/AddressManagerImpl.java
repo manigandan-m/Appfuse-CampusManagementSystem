@@ -21,7 +21,9 @@ public class AddressManagerImpl extends GenericManagerImpl<Address, Long> implem
     }
 
     /**
+     * <p>
      * Calls the AddressDao class method to add the standard to the database by passing the Address class object
+     * </p>
      * 
      * @param address
      *     address is the particulars of a place where a person lives
@@ -34,7 +36,9 @@ public class AddressManagerImpl extends GenericManagerImpl<Address, Long> implem
     }
 	
     /**
+     * <p>
      * Invokes the addressDao method to edit the address details by passing the Address class object
+     * </p>
      * 
      * @param address
      *     address is the particulars of a place where a person lives
@@ -47,7 +51,9 @@ public class AddressManagerImpl extends GenericManagerImpl<Address, Long> implem
     }
     
     /**
+     * <p>
      * Invokes the AddressDao class method to get the list of all of addresss
+     * </p>
      *  
      * @return 
      *     list of addresses returned
@@ -60,8 +66,10 @@ public class AddressManagerImpl extends GenericManagerImpl<Address, Long> implem
     }
     
     /**
+     * <p>
      * It returns the object of Address class by passing the id of address
      * Invokes the AddressDao method to get the address object
+     * </p>
      * 
      * @param addressId
      *     ID of address passed as argument to get the address

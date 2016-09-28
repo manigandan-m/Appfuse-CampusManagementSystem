@@ -30,7 +30,7 @@ import com.i2i.dao.StudentDao;
 @Transactional
 public class StandardDaoHibernate extends GenericDaoHibernate<Standard, Long> implements StandardDao {
     
-	/**
+    /**
      * Constructor that sets the entity to User.class.
      */
     public StandardDaoHibernate() {
@@ -38,8 +38,10 @@ public class StandardDaoHibernate extends GenericDaoHibernate<Standard, Long> im
     }
     
     /**
+     * <p>
      * Saves the standard to the database by passing it. It also gets the list of subjects assigned to that
      * standard and stores it as a list in the Standard 
+     * </p>
      * 
      * @param standard
      *     It is a grade in which students are taught a set of subjects
@@ -49,7 +51,6 @@ public class StandardDaoHibernate extends GenericDaoHibernate<Standard, Long> im
      */
     public void insertStandard(Standard standard) throws DatabaseException {
     	Session session = getSession();
-        
         try {     	
             standard.getSubjects().get(0).setStandard(standard);
             standard.getSubjects().get(1).setStandard(standard);
@@ -58,12 +59,14 @@ public class StandardDaoHibernate extends GenericDaoHibernate<Standard, Long> im
             standard.getSubjects().get(4).setStandard(standard);
             session.save(standard);            
         } catch (HibernateException e) {
-        	throw new DatabaseException("Entered user is not added. Standard ID already exits..", e);
+            throw new DatabaseException("Entered user is not added. Standard ID already exits..", e);
         }                                                                       
     }   
     
     /**
+     * <p>
      * Deletes the standard model object by passing standardId 
+     * </p>
      * 
      * @param standardId
      *     id of the standard to delete
@@ -72,7 +75,6 @@ public class StandardDaoHibernate extends GenericDaoHibernate<Standard, Long> im
      */
     public void deleteStandardById(int id) throws DatabaseException {
         Session session = getSession();
-        
         try {
             Standard standard = (Standard) session.get(Standard.class, id); 
             session.delete(standard);         
@@ -82,7 +84,9 @@ public class StandardDaoHibernate extends GenericDaoHibernate<Standard, Long> im
     }    
     
     /**
+     * <p>
      * Retrieves the standard object by passing id of the standard
+     * </p>
      * 
      * @param id
      *     id of the standard whose record has to be viewed
@@ -93,7 +97,6 @@ public class StandardDaoHibernate extends GenericDaoHibernate<Standard, Long> im
      */
     public Standard findStandardById(int id) throws DatabaseException {        
         Session session = getSession(); 
-        
         try {                           
             Standard standard = (Standard) session.get(Standard.class, id);            
             if (null == standard) {
@@ -106,7 +109,9 @@ public class StandardDaoHibernate extends GenericDaoHibernate<Standard, Long> im
     }
     
     /**
+     * <p>
      * Edits the standard details by accessing the database, passing the Standard class object.
+     * </p>
      * 
      * @param standard
      *     Standard class which is to edited
@@ -116,7 +121,6 @@ public class StandardDaoHibernate extends GenericDaoHibernate<Standard, Long> im
      */
     public void updateStandard(Standard standard) throws DatabaseException {
         Session session = getSession();
-        
         try {
             if (0 == standard.getClassCoordinator().getTeacherId()) {
             	standard.setClassCoordinator(null);
@@ -129,7 +133,9 @@ public class StandardDaoHibernate extends GenericDaoHibernate<Standard, Long> im
     }
     
     /**
+     * <p>
      * Retrieves  the list of standards from the database
+     * </p>
      * 
      * @return standards
      *     ArrayList of standards
@@ -138,7 +144,6 @@ public class StandardDaoHibernate extends GenericDaoHibernate<Standard, Long> im
      */
     public List<Standard> retrieveStandards() throws DatabaseException {
         Session session = getSession();
-        
         try {
             List<Standard> standards = session.createQuery("FROM Standard").list();
             if (standards.isEmpty()) {

@@ -58,7 +58,9 @@ public class UserController {
     }
     
     /**
+     * <p>
      * This returns a JSP Page where user can add it's details. It passes a User to the JSP Page
+     * </p>
      * 
      * @return User
      *     JSP Page where user can add the user details
@@ -75,8 +77,10 @@ public class UserController {
     }
     
     /**
+     * <p>
      * The method gets the user details from the JSP Page and invokes the 
      * UserService class method and sends the details as an object of model class User
+     * </p>
      * 
      * @param user
      *     user is a person who can be an admin, teacher or a student. It contains all the user details that is sent from the JSP Page
@@ -96,7 +100,9 @@ public class UserController {
     }    
     
     /**
+     * <p>
      * User details of a user can be viewed by passing the username of the user as a parameter
+     * </p>
      * 
      * @param username
      *     username of the user whose user details has to be viewed
@@ -117,7 +123,9 @@ public class UserController {
     }
     
     /**
+     * <p>
      * User details of a user can be viewed by passing the id of the user as a parameter
+     * </p>
      * 
      * @param userId
      *     id of the user whose user details has to be viewed
@@ -138,7 +146,9 @@ public class UserController {
     }
     
     /**
+     * <p>
      * Edits the details of the user using it's id
+     * </p>
      * 
      * @param id
      *     id of user entered by the user
@@ -178,10 +188,8 @@ public class UserController {
     @RequestMapping(value = "/editUser", method = RequestMethod.POST)
     public String editUser(@ModelAttribute("User") User user, BindingResult result, ModelMap message){  
         try {
-        	message.addAttribute("roleList", roleManager.getRoles());
-        	System.out.println("IN edit"+user.getUsername());
+            message.addAttribute("roleList", roleManager.getRoles());
             userManager.editUser(user);
-            System.out.println("IN edit"+user.getUsername());
             message.addAttribute("Message", "User Edited Successfully");
             return "EditUser";
     	} catch (DatabaseException e) {
@@ -191,15 +199,16 @@ public class UserController {
     }
     
     /**
+     * <p>
      * It invokes the UserService method to get all the users in the User class.
+     * </p>
      * 
      * @return
      *     returns the list of users and sends to the JSP Page where they can be viewed
      */
     @RequestMapping(value = "/displayUsers", method=RequestMethod.GET) 
     public ModelAndView displayUsers() {
-    	                                                                        
-            return new ModelAndView("DisplayUsers","users", userManager.getUsers());                                           
+        return new ModelAndView("DisplayUsers","users", userManager.getUsers());                                           
         
     }
 }

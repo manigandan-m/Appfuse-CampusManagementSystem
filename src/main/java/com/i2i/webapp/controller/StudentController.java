@@ -50,9 +50,11 @@ public class StudentController  {
     }
 
     /**
+     * <p>
      * Gets the student details from the JSP Page and passes it as student.
      * It gets the userId and invokes the UserService method to get the corresponding user.
      * It invokes the StudentService method and sends the user and student for adding student details
+     * </p>
      *  
      * @param student
      *     person who is a pupil of a school   
@@ -62,21 +64,23 @@ public class StudentController  {
     public ModelAndView addStudent(@ModelAttribute("Student") Student student, BindingResult result) {
         String message = null;    
         try {
-        	System.out.println("In student controller:"+ student.getUser().getId());
-        	User user = userManager.getUserById(student.getUser().getId());
-        	student.setUser(user);
-        	studentService.addStudent(student);                                        
+            System.out.println("In student controller:"+ student.getUser().getId());
+            User user = userManager.getUserById(student.getUser().getId());
+            student.setUser(user);
+            studentService.addStudent(student);                                        
             message = "Student is added successfully";            
         } catch (DatabaseException ex) {
-        	ex.printStackTrace();
+            ex.printStackTrace();
             message = ex.getMessage().toString();                         
         } 
         return new ModelAndView("AddStudent","addMessage", message);       
     }
 
     /**
+     * <p>
      * Used to view the record of the student by passing roll number
      * It invokes the StudemtService class method and gets the Student and passes it to JSP Page
+     * </p>
      * 
      * @param studentId
      *     roll number of the student
@@ -96,8 +100,10 @@ public class StudentController  {
     }
     
     /**
+     * <p>
      * Used to view the record of the student by passing roll number
      * It invokes the StudemtService class method and gets the Student and passes it to JSP Page
+     * </p>
      * 
      * @param studentId
      *     roll number of the student
@@ -117,8 +123,10 @@ public class StudentController  {
     }
 
     /**
+     * <p>
      * It displays all the students by invoking the StudentService class method.
      * It sends the list of the students to the JSP Page
+     * </p>
      *  
      * @return
      *     returns the JSP Page where all the students are displayed
@@ -133,7 +141,9 @@ public class StudentController  {
     }
 
     /**
+     * <p>
      * Deletes the standard record by passing the roll number of the standard
+     * </p>
      * 
      * @param standardId
      *     roll number of the standard whose record has to be deleted
@@ -152,7 +162,9 @@ public class StudentController  {
     }
     
     /**
+     * <p>
      * Gets the roll number of the student whose details needs to be edited
+     * </p>
      * 
      * @param studentId
      *     rollNumber of student
@@ -173,7 +185,9 @@ public class StudentController  {
     }
     
     /**
+     * <p>
      * Edits the details of the student using it's id
+     * </p>
      * 
      * @param id
      *     id of student entered by the user
@@ -187,7 +201,7 @@ public class StudentController  {
     @RequestMapping(value = "/editStudentById", method = RequestMethod.GET)
     public String editStudentForm(@RequestParam("rollNumber") int rollNumber, ModelMap model) {
     	try {
-    		model.addAttribute("standards", standardService.getStandards());
+    	    model.addAttribute("standards", standardService.getStandards());
     	    model.addAttribute("Student", studentService.getStudentById(rollNumber));
     	    return "EditStudent";
     	} catch (DatabaseException e) {
@@ -216,9 +230,9 @@ public class StudentController  {
     @RequestMapping(value = "/editStudent", method = RequestMethod.POST)
     public String editStudent(@ModelAttribute("Student") Student student, BindingResult result, ModelMap message) {  
         try {
-        	User user = userManager.getUserById(student.getUser().getId());
-        	student.setUser(user);
-        	studentService.editStudent(student);      
+            User user = userManager.getUserById(student.getUser().getId());
+            student.setUser(user);
+            studentService.editStudent(student);      
             message.addAttribute("Message", "Student Edited Successfully");
             return "EditStudent";
     	} catch (DatabaseException e) {

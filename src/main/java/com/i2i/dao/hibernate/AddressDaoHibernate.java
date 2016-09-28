@@ -20,7 +20,9 @@ public class AddressDaoHibernate extends GenericDaoHibernate<Address, Long> impl
     }
     
     /**
+     * <p>
      * Saves the address model object to the database by passing it
+     * </p>
      * 
      * @param address
      *     address to be inserted for a user
@@ -36,8 +38,10 @@ public class AddressDaoHibernate extends GenericDaoHibernate<Address, Long> impl
     }
 	
     
-	/**
+    /**
+     * <p>
      * Edits the address details by accessing the database, passing the address.
+     * </p>
      * 
      * @param address
      *     address whose details have to be edited
@@ -55,7 +59,9 @@ public class AddressDaoHibernate extends GenericDaoHibernate<Address, Long> impl
     }
     
     /**
+     * <p>
      * Retrieves the address object by passing id of the address
+     * </p>
      * 
      * @param id
      *     id of the address whose record has to be viewed
@@ -76,7 +82,9 @@ public class AddressDaoHibernate extends GenericDaoHibernate<Address, Long> impl
     }
     
     /**
+     * <p>
      * Retrieves  the list of address from the database
+     * </p>
      * 
      * @return addresses
      *     list of address

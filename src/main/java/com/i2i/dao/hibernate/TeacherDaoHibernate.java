@@ -23,7 +23,9 @@ public class TeacherDaoHibernate extends GenericDaoHibernate<Teacher, Long> impl
     }
 
     /**
+     * <p>
      * Saves the teacher to the database by passing it
+     * </p>
      * 
      * @param teacher
      *     teacher is a person who teaches in school
@@ -41,7 +43,9 @@ public class TeacherDaoHibernate extends GenericDaoHibernate<Teacher, Long> impl
     }
         
     /**
+     * <p>
      * Retrieves the teacher by passing id of the teacher
+     * </p>
      * 
      * @param id
      *     id of the teacher whose record has to be viewed
@@ -59,12 +63,14 @@ public class TeacherDaoHibernate extends GenericDaoHibernate<Teacher, Long> impl
             } 
             return teacher;
         } catch (HibernateException e) { 
-                throw new DatabaseException("Entered teacher is not found. Kindly try again with vaild input data", e);
+            throw new DatabaseException("Entered teacher is not found. Kindly try again with vaild input data", e);
         }                          
     }
 
     /**
+     * <p>
      * Deletes the teacher by passing teacherId 
+     * </p>
      * 
      * @param teacherId
      *     id of the teacher to delete
@@ -77,12 +83,14 @@ public class TeacherDaoHibernate extends GenericDaoHibernate<Teacher, Long> impl
             Teacher teacher = (Teacher) session.get(Teacher.class, id); 
             session.delete(teacher);
         } catch (IllegalArgumentException e) {                       
-              throw new DatabaseException("Entered teacher is not deleted. Kindly try again with vaild student id", e);
+            throw new DatabaseException("Entered teacher is not deleted. Kindly try again with vaild student id", e);
         }                            
     }
         
     /**
+     * <p>
      * Edits the teacher details by accessing the database.
+     * </p>
      * 
      * @param teacher
      *     teacher is a person who teaches in school
@@ -95,12 +103,14 @@ public class TeacherDaoHibernate extends GenericDaoHibernate<Teacher, Long> impl
         try {
             session.update(teacher);
         } catch (HibernateException e) {
-              throw new DatabaseException("Please check the data you have given..." , e);  
+            throw new DatabaseException("Please check the data you have given..." , e);  
         }
     }
         
     /**
+     * <p>
      * Retrieves  the list of teachers from the database
+     * </p>
      * 
      * @return teachers
      *     List of teachers

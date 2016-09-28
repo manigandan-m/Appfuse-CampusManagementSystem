@@ -36,9 +36,11 @@ public class TeacherController  {
     }
 
     /**
+     * <p>
      * Gets the teacher details from the JSP Page and passes it as a Teacher.
      * It gets the userId and invokes the UserService method to get the corresponding user object.
      * It invokes the TeacherService method and sends the user and teacher object for adding teacher details
+     * </p>
      *  
      * @param teacher
      *     a person who teaches in a school.
@@ -60,8 +62,10 @@ public class TeacherController  {
 
     
     /**
+     * <p>
      * Used to view the record of the teacher by passing roll number
      * It invokes the StudemtService class method and gets the object of Teacher class and passes it to JSP Page
+     * </p>
      * 
      * @param teacherId
      *     ID of the teacher
@@ -81,8 +85,10 @@ public class TeacherController  {
     }
     
     /**
+     * <p>
      * Used to view the record of the teacher by passing roll number
      * It invokes the StudemtService class method and gets the Teacher and passes it to JSP Page
+     * </p>
      * 
      * @param teacherId
      *     ID of the teacher
@@ -102,8 +108,10 @@ public class TeacherController  {
     }
     
     /**
+     * <p>
      * It displays all the teachers by invoking the TeacherService class method.
      * It sends the list of the teachers to the JSP Page by using ModelAndView object
+     * </p>
      *  
      * @return
      *     returns the JSP Page where all the teachers are displayed
@@ -118,7 +126,9 @@ public class TeacherController  {
     }
     
     /**
+     * <p>
      * Deletes the teacher record by passing the ID of the teacher
+     * </p>
      * 
      * @param teacherId
      *     ID of the teacher whose record has to be deleted
@@ -137,7 +147,9 @@ public class TeacherController  {
     }
     
     /**
+     * <p>
      * Gets the teacherId of the teacher whose details needs to be edited
+     * </p>
      * 
      * @param teacherId
      *     id of teacher
@@ -148,13 +160,15 @@ public class TeacherController  {
     	    Teacher teacher = teacherService.getTeacherById(teacherId);
     	    map.addAttribute("teacher",teacher);
     	} catch(DatabaseException e) {
-    		map.addAttribute("Message",e.getMessage().toString());
+    	    map.addAttribute("Message",e.getMessage().toString());
     	}
     	return "EditTeacherDetails";
     }
     
     /**
+     * <p>
      * Edits the details of the teacher using it's id
+     * </p>
      * 
      * @param id
      *     id of teacher entered by the user
@@ -196,9 +210,9 @@ public class TeacherController  {
     @RequestMapping(value = "/editTeacher", method = RequestMethod.POST)
     public String editTeacher(@ModelAttribute("Teacher") Teacher teacher, BindingResult result, ModelMap message) {  
         try {
-        	User user = userManager.getUserById(teacher.getUser().getId());
+            User user = userManager.getUserById(teacher.getUser().getId());
             teacher.setUser(user);
-        	teacherService.editTeacher(teacher);      
+            teacherService.editTeacher(teacher);      
             message.addAttribute("Message", "Teacher Edited Successfully");
             return "EditTeacher";
     	} catch (DatabaseException e) {

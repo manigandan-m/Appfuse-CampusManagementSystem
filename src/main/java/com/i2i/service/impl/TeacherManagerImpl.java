@@ -31,7 +31,9 @@ public class TeacherManagerImpl extends GenericManagerImpl<Teacher, Long> implem
     }
 
     /**
+     * <p>
      * Calls the TeacherDao class method to add the standard to the database by passing the Teacher class object
+     * </p>
      * 
      * @param teacher
      *     object of class Teacher
@@ -44,7 +46,9 @@ public class TeacherManagerImpl extends GenericManagerImpl<Teacher, Long> implem
     }
     
     /**
+     * <p>
      * Returns the teacher model object by passing the id of teacher
+     * </p>
      * 
      * @param id
      *     id of teacher
@@ -59,7 +63,9 @@ public class TeacherManagerImpl extends GenericManagerImpl<Teacher, Long> implem
     }
     
     /**
+     * <p>
      * Invokes the TeacherDao class method to delete teacher using id
+     * </p>
      * 
      * @param id
      *     id of the teacher to delete
@@ -72,7 +78,9 @@ public class TeacherManagerImpl extends GenericManagerImpl<Teacher, Long> implem
     }
     
     /**
+     * <p>
      * Invokes the teacherDao method to edit the teacher details by passing the Teacher class object
+     * </p>
      * 
      * @param teacher
      *     object of Teacher class
@@ -85,7 +93,9 @@ public class TeacherManagerImpl extends GenericManagerImpl<Teacher, Long> implem
     }
     
     /**
+     * <p>
      * Invokes the TeacherDao class method to get the list of all of teachers
+     * </p>
      *  
      * @return 
      *     list of teachers returned in List datatype

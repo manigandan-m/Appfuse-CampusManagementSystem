@@ -101,7 +101,9 @@ public class UserDaoHibernate extends GenericDaoHibernate<User, Long> implements
     }
     
     /**
+     * <p>
      * Retrieves the user by passing userId of the user
+     * </p>
      * 
      * @param id
      *     id of the user whose record has to be viewed
@@ -124,7 +126,9 @@ public class UserDaoHibernate extends GenericDaoHibernate<User, Long> implements
     }
     
     /**
+     * <p>
      * Edits the user details by accessing the database.
+     * </p>
      * 
      * @param user
      *     object of User class to edit
@@ -135,9 +139,7 @@ public class UserDaoHibernate extends GenericDaoHibernate<User, Long> implements
     public void editUser(User user) throws DatabaseException {
         Session session = getSession();
         try {
-        	System.out.println(user.getUsername());
             session.update(user);
-            System.out.println(user.getUsername());
         } catch (HibernateException e) {
             throw new DatabaseException("Please check the data you have given..." , e);  
        }

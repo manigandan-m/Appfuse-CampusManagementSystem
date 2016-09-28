@@ -19,7 +19,7 @@ import com.i2i.dao.StudentDao;
 
 /**
  * <p>
- * Service which is used to generate the time table of standard and
+ * Service which is used to generate the time table of standard
  * </p>
  * 
  * @author Manigandan
@@ -56,7 +56,7 @@ public class PeriodSubjectDetailManagerImpl extends GenericManagerImpl<PeriodSub
         Standard standard = standardService.getStandardById(standardId);
         List<Subject> subjects = standard.getSubjects();                    
         generatePeriods(allocateSubjectToPeriod(subjects));        
-	}	
+    }	
 	
     /**
      * Gets the list of subjects of standard and generate the list of periods with subject code
@@ -124,8 +124,7 @@ public class PeriodSubjectDetailManagerImpl extends GenericManagerImpl<PeriodSub
      *     NumberFormatException
      */
     public List<PeriodSubjectDetail> getPeriodSubjectDetailsByStandardId(int standardId) throws DatabaseException {
-    	System.out.println("manai");
-        return (periodSubjectDetailDao.retrievePeriodSubjectDetailsByStandardId(standardId));        
+    	return (periodSubjectDetailDao.retrievePeriodSubjectDetailsByStandardId(standardId));        
     }
     
     /**
