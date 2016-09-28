@@ -17,7 +17,7 @@
             <div class="freshdesignweb-top">
                 <a  href="facultyTimeTable.html?teacherId=${searchTeacher.getTeacherId()}">View Time Table</a>
                 <span class="right">
-                    <a href="Logout.html">
+                    <a href="logout.html">
                         <strong>Logout</strong>
                     </a>
                 </span>

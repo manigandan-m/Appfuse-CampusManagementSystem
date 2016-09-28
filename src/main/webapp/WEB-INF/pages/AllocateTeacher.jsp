@@ -17,7 +17,7 @@
                 <a href="home.html">Home</a>&nbsp;&nbsp;
                 <a href="Subject.html">Go Back</a>
                 <span class="right">
-                    <a href="Logout.html">
+                    <a href="logout.html">
                         <strong>Logout</strong>
                     </a>
                 </span>

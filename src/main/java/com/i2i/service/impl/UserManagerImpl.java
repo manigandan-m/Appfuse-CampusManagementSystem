@@ -272,4 +272,17 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
     public User getUserById(Long userId) throws DatabaseException {
     	return userDao.findUserById(userId);
     }
+    
+    /**
+     * Invokes the userDao method to edit the user details by passing the User class object
+     * 
+     * @param user
+     *     user whose details have to be edited
+     * @throws DataBaseException
+     *     if there is an error in getting the object like NullPointerException,
+     *     NumberFormatException
+     */
+    public void editUser(User user) throws DatabaseException {
+        userDao.editUser(user);
+    }
 }

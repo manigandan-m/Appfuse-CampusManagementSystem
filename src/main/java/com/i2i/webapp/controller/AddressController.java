@@ -160,8 +160,10 @@ public class AddressController  {
      *     when a servlet related problem occurs.
      */
     @RequestMapping(value = "/editAddress", method = RequestMethod.POST)
-    public String editAddress(@ModelAttribute("Address") Address address, ModelMap message) {  
+    public String editAddress(@ModelAttribute("Address") Address address, BindingResult result, ModelMap message) {  
         try {
+        	User user = userManager.getUserById(address.getUser().getId());
+            address.setUser(user);
         	addressManager.editAddress(address);      
             message.addAttribute("Message", "Address Edited Successfully");
             return "EditAddress";

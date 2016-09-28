@@ -18,7 +18,7 @@
                 <a href="home.html">Home</a>&nbsp;&nbsp;
                 <a href="displayTeachers.html">Teachers</a>
                 <span class="right">
-                    <a href="Logout.html">
+                    <a href="logout.html">
                         <strong>Logout</strong>
                     </a>
                 </span>
@@ -86,7 +86,7 @@
                         <option value="Married">Married</option>
                         </form:select><br><br> 
                         <form:input type = "hidden" path = "teacherId" value="${teacherId}"/>
-                        <form:input type = "hidden" path = "user.userId" value="${userId}"/>
+                        <form:input type = "hidden" path = "user.id" value="${userId}"/>
                         
                        <input class="buttom" name="submit" id="submit" tabindex="5" value="Submit" type="submit"> 	 
                 </form:form>

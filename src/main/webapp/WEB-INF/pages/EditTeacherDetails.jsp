@@ -33,7 +33,7 @@ body {
                 <a href="home.html">Home</a>&nbsp;&nbsp;
                 <a href="displayTeachers.html">Teachers</a>
                 <span class="right">
-                    <a href="Logout.html">
+                    <a href="logout.html">
                         <strong>Logout</strong>
                     </a>
                 </span>
@@ -45,10 +45,11 @@ body {
             
 <c:if test="${null != teacher}">
 <center>
-<a  href="editUserById.html?userId=${teacher.getUser().getUserId()}">Edit User Details</a>
+<a  href="editUserById.html?userId=${teacher.getUser().getId()}">Edit User Details</a>
 <a  href="editAddressById.html?addressId=${teacher.getUser().getAddress().getAddressId()}">Edit Address Details</a>
 <a  href="editTeacherById.html?teacherId=${teacher.getTeacherId()}">Edit Teacher Details</a>
 </center></c:if>
+</div>
 <c:if test="${null != Message}">
                 <c:out value="${Message}"/>
             </c:if>

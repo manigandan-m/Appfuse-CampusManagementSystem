@@ -194,8 +194,10 @@ public class TeacherController  {
      *     when a servlet related problem occurs.
      */
     @RequestMapping(value = "/editTeacher", method = RequestMethod.POST)
-    public String editTeacher(@ModelAttribute("Teacher") Teacher teacher, ModelMap message) {  
+    public String editTeacher(@ModelAttribute("Teacher") Teacher teacher, BindingResult result, ModelMap message) {  
         try {
+        	User user = userManager.getUserById(teacher.getUser().getId());
+            teacher.setUser(user);
         	teacherService.editTeacher(teacher);      
             message.addAttribute("Message", "Teacher Edited Successfully");
             return "EditTeacher";

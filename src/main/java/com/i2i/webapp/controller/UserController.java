@@ -8,6 +8,7 @@ import com.i2i.model.User;
 import com.i2i.service.RoleManager;
 import com.i2i.service.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
@@ -102,7 +103,7 @@ public class UserController {
      * @return
      *     returns the JSP Page where user details of a single user can be viewed 
      */
-    /*@RequestMapping(value = "/searchUser", method=RequestMethod.GET)  
+    @RequestMapping(value = "/searchUser", method=RequestMethod.GET)  
     public ModelAndView viewUser(@RequestParam("username") String username) {                
         ModelAndView modelView = new ModelAndView();
         modelView.setViewName("User");
@@ -113,7 +114,7 @@ public class UserController {
             modelView.addObject("searchMessage", e.getMessage());             
         }
         return modelView; 
-    }*/ 
+    }
     
     /**
      * User details of a user can be viewed by passing the id of the user as a parameter
@@ -123,7 +124,7 @@ public class UserController {
      * @return
      *     returns the JSP Page where user details of a single user can be viewed 
      */
-    /*@RequestMapping(value = "/searchUserById", method=RequestMethod.GET)  
+    @RequestMapping(value = "/searchUserById", method=RequestMethod.GET)  
     public ModelAndView viewUserById(@RequestParam("userId") Long userId) {                
         ModelAndView modelView = new ModelAndView();
         modelView.setViewName("User");
@@ -134,7 +135,7 @@ public class UserController {
             modelView.addObject("searchMessage", e.getMessage());             
         }
         return modelView; 
-    }*/ 
+    }
     
     /**
      * Edits the details of the user using it's id
@@ -145,7 +146,7 @@ public class UserController {
      *     JSP Page where user can make changes to the various attributes of the user
      * 
      */
-    /*@RequestMapping(value = "/editUserById", method = RequestMethod.GET)
+    @RequestMapping(value = "/editUserById", method = RequestMethod.GET)
     public String editUserForm(@RequestParam("userId") Long id, ModelMap model) {
     	try {
     	    model.addAttribute("User", userManager.getUserById(id));
@@ -155,7 +156,7 @@ public class UserController {
     	    model.addAttribute("Message", e.getMessage().toString());
             return "EditUser";
     	}
-    }*/
+    }
     
     /**
      * <p>
@@ -174,18 +175,20 @@ public class UserController {
      * @throws ServletException
      *     when a servlet related problem occurs.
      */
-    /*@RequestMapping(value = "/editUser", method = RequestMethod.POST)
-    public String editUser(@ModelAttribute("User") User user, ModelMap message){  
+    @RequestMapping(value = "/editUser", method = RequestMethod.POST)
+    public String editUser(@ModelAttribute("User") User user, BindingResult result, ModelMap message){  
         try {
         	message.addAttribute("roleList", roleManager.getRoles());
-            userManager.editUser(user);      
+        	System.out.println("IN edit"+user.getUsername());
+            userManager.editUser(user);
+            System.out.println("IN edit"+user.getUsername());
             message.addAttribute("Message", "User Edited Successfully");
             return "EditUser";
     	} catch (DatabaseException e) {
     	    message.addAttribute("Message", (e.getMessage().toString()));
     	    return "EditUser";
     	}
-    }*/
+    }
     
     /**
      * It invokes the UserService method to get all the users in the User class.
@@ -193,10 +196,10 @@ public class UserController {
      * @return
      *     returns the list of users and sends to the JSP Page where they can be viewed
      */
-    /*@RequestMapping(value = "/displayUsers", method=RequestMethod.GET) 
+    @RequestMapping(value = "/displayUsers", method=RequestMethod.GET) 
     public ModelAndView displayUsers() {
     	                                                                        
             return new ModelAndView("DisplayUsers","users", userManager.getUsers());                                           
         
-    }*/
+    }
 }

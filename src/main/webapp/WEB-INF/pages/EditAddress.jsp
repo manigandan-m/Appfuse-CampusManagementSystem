@@ -16,7 +16,7 @@
             <div class="freshdesignweb-top">
                 <a href="home.html">Home</a>&nbsp;&nbsp;
                 <span class="right">
-                    <a href="Logout.html">
+                    <a href="logout.html">
                         <strong>Logout</strong>
                     </a>
                 </span>
@@ -54,7 +54,7 @@
                      
                      <p class="contact"><label for="pincode" path = "label1">PinCode</label></p> 
     			<form:input path="pincode" placeholder="PinCode" data-validation="number" data-validation-error-msg = "Enter numbers only" required="required" tabindex="1" type="text"/> 
-                 <form:input type = "hidden" path = "user.userId" value="${userId}"/>
+                 <form:input type = "hidden" path = "user.id" value="${userId}"/>
                  <form:input type = "hidden" path = "addressId" value="${addressId}"/>     
                        <input class="buttom" name="submit" id="submit" tabindex="5" value="Submit" type="submit"> 	 
                 </form:form>

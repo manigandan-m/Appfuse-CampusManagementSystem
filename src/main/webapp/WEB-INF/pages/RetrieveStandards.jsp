@@ -22,7 +22,7 @@
                 <a href="home.html">Home</a>&nbsp;&nbsp;
                 <a href="AddStandard.html">Add a new Standard</a>
                 <span class="right">
-                    <a href="Logout.html">
+                    <a href="logout.html">
                         <strong>Logout</strong>
                     </a>
                 </span>

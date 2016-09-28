@@ -122,4 +122,24 @@ public class UserDaoHibernate extends GenericDaoHibernate<User, Long> implements
             throw new DatabaseException("Entered user is not found. Kindly try again with vaild input data", e);
         }                         
     }
+    
+    /**
+     * Edits the user details by accessing the database.
+     * 
+     * @param user
+     *     object of User class to edit
+     * @throws DataBaseException
+     *     if there is an error in getting the object like NullPointerException,
+     *     NumberFormatException, HibernateException
+     */
+    public void editUser(User user) throws DatabaseException {
+        Session session = getSession();
+        try {
+        	System.out.println(user.getUsername());
+            session.update(user);
+            System.out.println(user.getUsername());
+        } catch (HibernateException e) {
+            throw new DatabaseException("Please check the data you have given..." , e);  
+       }
+    }
 }

@@ -25,7 +25,7 @@
                 <a href="displayTeacher?teacherId=${teacher.getTeacherId()}">Go Back</a>
                 
                 <span class="right">
-                    <a href="Logout.html">
+                    <a href="logout.html">
                         <strong>Logout</strong>
                     </a>
                 </span>

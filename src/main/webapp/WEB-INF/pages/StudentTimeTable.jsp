@@ -23,7 +23,7 @@
             <div class="freshdesignweb-top">
                 <a href="displayStudent?rollNumber=${rollNumber}">Go Back</a>
                 <span class="right">
-                    <a href="Logout.html">
+                    <a href="logout.html">
                         <strong>Logout</strong>
                     </a>
                 </span>

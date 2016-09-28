@@ -18,7 +18,7 @@
             <div class="freshdesignweb-top">
                 <a  href="studentTimeTable.html?standardId=${searchStudent.getStandard().getStandardId()}&rollNumber=${searchStudent.getRollNumber()}">View Time Table</a>
                 <span class="right">
-                    <a href="Logout.html">
+                    <a href="logout.html">
                         <strong>Logout</strong>
                     </a>
                 </span>

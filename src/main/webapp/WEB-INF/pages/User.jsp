@@ -16,7 +16,7 @@
             <div class="freshdesignweb-top">
                 <a href="home.html">Home</a>
                 <span class="right">
-                    <a href="Logout.html">
+                    <a href="logout.html">
                         <strong>Logout</strong>
                     </a>
                 </span>
@@ -82,10 +82,10 @@
                         </form:select><br><br>
                        
                         <p class="contact"><label for="email" path = "label1">Email</label><p>
-                <form:input path="email" placeholder="Email" data-validation="length alphanumeric" data-validation-length="min4" required ="required" tabindex="1" type="text"/>
+                <form:input path="email" placeholder="Email" required ="required" tabindex="1" type="text"/>
                        
                         <p class="contact"><label for="website" path = "label1">Website</label><p>
-                <form:input path="website" placeholder="website" data-validation="length alphanumeric" data-validation-length="min4" required ="required" tabindex="1" type="text"/>
+                <form:input path="website" placeholder="website" required ="required" tabindex="1" type="text"/>
                        
                         <p class="contact"><label for="phoneNumber" path = "label1">Mobile Number</label></p>
                 <form:input path="phoneNumber" placeholder="Mobile Number" maxlength="10" pattern="\d{10}" title="Please enter exactly 10 digits" tabindex="1" type="text"/>

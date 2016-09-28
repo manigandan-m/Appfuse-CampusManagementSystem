@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.i2i.exception.DatabaseException;
+import com.i2i.service.StandardService;
 import com.i2i.service.StudentService;
 import com.i2i.service.UserManager;
 import com.i2i.model.Student;
@@ -31,6 +32,7 @@ import com.i2i.model.User;
 public class StudentController  {
     private StudentService studentService = null;
     private UserManager userManager = null;
+    private StandardService standardService = null;
 
     @Autowired
     public void setStudentManager(StudentService studentService) {
@@ -40,6 +42,11 @@ public class StudentController  {
     @Autowired
     public void setUserManager(UserManager userManager) {
         this.userManager = userManager;
+    }
+    
+    @Autowired
+    public void setStandardService(StandardService standardService) {
+        this.standardService = standardService;
     }
 
     /**
@@ -180,6 +187,7 @@ public class StudentController  {
     @RequestMapping(value = "/editStudentById", method = RequestMethod.GET)
     public String editStudentForm(@RequestParam("rollNumber") int rollNumber, ModelMap model) {
     	try {
+    		model.addAttribute("standards", standardService.getStandards());
     	    model.addAttribute("Student", studentService.getStudentById(rollNumber));
     	    return "EditStudent";
     	} catch (DatabaseException e) {
@@ -206,8 +214,10 @@ public class StudentController  {
      *     when a servlet related problem occurs.
      */
     @RequestMapping(value = "/editStudent", method = RequestMethod.POST)
-    public String editStudent(@ModelAttribute("Student") Student student, ModelMap message) {  
+    public String editStudent(@ModelAttribute("Student") Student student, BindingResult result, ModelMap message) {  
         try {
+        	User user = userManager.getUserById(student.getUser().getId());
+        	student.setUser(user);
         	studentService.editStudent(student);      
             message.addAttribute("Message", "Student Edited Successfully");
             return "EditStudent";

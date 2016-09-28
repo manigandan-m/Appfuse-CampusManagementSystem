@@ -30,7 +30,7 @@ a:hover, a:active {
                 <a href="home.html">Home</a>&nbsp;&nbsp;
                 <a href="displayStudents.html">Students</a>
                 <span class="right">
-                    <a href="Logout.html">
+                    <a href="logout.html">
                         <strong>Logout</strong>
                     </a>
                 </span>
@@ -41,10 +41,13 @@ a:hover, a:active {
             </header>
 <c:if test="${null != student}">
 <center>
-<a  href="editUserById.html?userId=${student.getUser().getUserId()}">Edit User Details</a>
+<a  href="editUserById.html?userId=${student.getUser().getId()}">Edit User Details</a>
 <a  href="editAddressById.html?addressId=${student.getUser().getAddress().getAddressId()}">Edit Address Details</a>
 <a  href="editStudentById.html?rollNumber=${student.getRollNumber()}">Edit Student Details</a>
-</center></c:if>
+</center>
+</c:if>
+</div>
+
 <c:if test="${null != Message}">
                 <c:out value="${Message}"/>
             </c:if>

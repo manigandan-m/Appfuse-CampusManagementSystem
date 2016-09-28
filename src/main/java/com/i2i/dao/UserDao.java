@@ -50,4 +50,6 @@ public interface UserDao extends GenericDao<User, Long> {
     
     User findUserById(Long userId) throws DatabaseException;
     
+    void editUser(User user) throws DatabaseException;
+    
 }

@@ -18,7 +18,7 @@
                 <a href="home.html">Home</a>&nbsp;&nbsp;
                 <a href="displayStudents.html">Students</a>
                 <span class="right">
-                    <a href="Logout.html">
+                    <a href="logout.html">
                         <strong>Logout</strong>
                     </a>
                 </span>
@@ -67,7 +67,7 @@
                         </form:select><br><br>  
                         
                         <form:input type = "hidden" path = "rollNumber" value="${rollNumber}"/>
-                        <form:input type = "hidden" path = "user.userId" value="${userId}"/>
+                        <form:input type = "hidden" path = "user.id" value="${userId}"/>
                         
                        <input class="buttom" name="submit" id="submit" tabindex="5" value="Edit" type="submit"> 	 
                 </form:form>

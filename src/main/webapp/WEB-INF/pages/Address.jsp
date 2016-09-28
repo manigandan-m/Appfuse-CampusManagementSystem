@@ -16,7 +16,7 @@
             <div class="freshdesignweb-top">
                 <a href="home.html">Home</a>
                 <span class="right">
-                    <a href="Logout.html">
+                    <a href="logout.html">
                         <strong>Logout</strong>
                     </a>
                 </span>
