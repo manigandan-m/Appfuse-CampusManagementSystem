@@ -32,8 +32,8 @@ public class PeriodSubjectDetailManagerImpl extends GenericManagerImpl<PeriodSub
     private StandardService standardService;
 	
     @Autowired
-    public PeriodSubjectDetailManagerImpl(PeriodSubjectDetailDao PeriodSubjectDetailDao, StandardService standardService) {
-        super(PeriodSubjectDetailDao);
+    public PeriodSubjectDetailManagerImpl(PeriodSubjectDetailDao periodSubjectDetailDao, StandardService standardService) {
+        super(periodSubjectDetailDao);
         this.periodSubjectDetailDao = periodSubjectDetailDao;
         this.standardService = standardService;
     }
@@ -124,6 +124,7 @@ public class PeriodSubjectDetailManagerImpl extends GenericManagerImpl<PeriodSub
      *     NumberFormatException
      */
     public List<PeriodSubjectDetail> getPeriodSubjectDetailsByStandardId(int standardId) throws DatabaseException {
+    	System.out.println("manai");
         return (periodSubjectDetailDao.retrievePeriodSubjectDetailsByStandardId(standardId));        
     }
     

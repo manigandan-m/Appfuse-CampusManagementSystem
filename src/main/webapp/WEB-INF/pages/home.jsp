@@ -13,11 +13,8 @@
 <link href="layout/styles/layout.css" rel="stylesheet" type="text/css"
 	media="all">
 </head>
-<body id="top">
-   <ul>
-				    <li><a href="User.html">Create Admin</a></li>
-					
-				</ul>
+<body>
+
 	<!-- ################################################################################################ -->
 	<div class="wrapper row0">
 		<div id="topbar" class="clear">

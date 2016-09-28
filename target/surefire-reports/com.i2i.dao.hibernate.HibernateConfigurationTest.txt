@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.i2i.dao.hibernate.HibernateConfigurationTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 26.84 sec - in com.i2i.dao.hibernate.HibernateConfigurationTest

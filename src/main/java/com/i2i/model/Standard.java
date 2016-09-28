@@ -3,6 +3,7 @@ package com.i2i.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -43,8 +44,9 @@ public class Standard {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "standard", cascade = CascadeType.ALL)   
     List<Subject> subjects = new ArrayList<Subject>();
 
+    
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "coordinator_id")
+    @JoinColumn(name = "coordinator_id")    
     private Teacher classCoordinator;
 
     public int getStandardId() {

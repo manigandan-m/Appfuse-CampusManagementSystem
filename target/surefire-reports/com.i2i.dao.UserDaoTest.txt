@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.i2i.dao.UserDaoTest
--------------------------------------------------------------------------------
-Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 35.694 sec - in com.i2i.dao.UserDaoTest

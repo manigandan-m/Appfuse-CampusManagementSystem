@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.i2i.exception.DatabaseException;
 import com.i2i.service.AddressManager;
 import com.i2i.service.RoleManager;
+import com.i2i.service.StandardService;
 import com.i2i.service.UserManager;
 import com.i2i.model.Address;
 import com.i2i.model.Role;
@@ -38,6 +39,7 @@ public class AddressController  {
     private AddressManager addressManager = null;
     private UserManager userManager = null;
     private RoleManager roleManager = null;
+    private StandardService standardService = null;
 
     @Autowired
     public void setAddressManager(AddressManager addressManager) {
@@ -52,6 +54,11 @@ public class AddressController  {
     @Autowired
     public void setRoleManager(RoleManager roleManager) {
         this.roleManager = roleManager;
+    }
+    
+    @Autowired
+    public void setStandardService(StandardService standardService) {
+        this.standardService = standardService;
     }
 
     /**
@@ -80,7 +87,7 @@ public class AddressController  {
             List<Role> roles = roleManager.getRoles();
             if((user.getRole().getName()).equals("ROLE_STUDENT")) {
                 map.addAttribute("Student", new Student());
-                //map.addAttribute("standards", standardService.getStandards());
+                map.addAttribute("standards", standardService.getStandards());
                 return "AddStudent";
             } else if (user.getRole().getName().equals("ROLE_TEACHER")){
                 map.addAttribute("Teacher", new Teacher());
@@ -125,7 +132,7 @@ public class AddressController  {
      *     if there is failed or interrupted input output operations.
      */
     @RequestMapping(value = "/editAddressById", method = RequestMethod.GET)
-    public String editAddressForm(@RequestParam("addressId") int id, ModelMap model, BindingResult result) {
+    public String editAddressForm(@RequestParam("addressId") int id, ModelMap model) {
          try {
              model.addAttribute("Address", addressManager.getAddressById(id));
              return "EditAddress";
@@ -153,7 +160,7 @@ public class AddressController  {
      *     when a servlet related problem occurs.
      */
     @RequestMapping(value = "/editAddress", method = RequestMethod.POST)
-    public String editAddress(@ModelAttribute("Address") Address address, ModelMap message, BindingResult result) {  
+    public String editAddress(@ModelAttribute("Address") Address address, ModelMap message) {  
         try {
         	addressManager.editAddress(address);      
             message.addAttribute("Message", "Address Edited Successfully");

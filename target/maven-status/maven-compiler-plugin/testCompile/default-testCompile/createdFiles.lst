@@ -23,7 +23,6 @@ com/i2i/service/impl/LookupManagerImplTest.class
 com/i2i/util/DateConverterTest$1.class
 com/i2i/service/impl/UserManagerImplTest.class
 com/i2i/webapp/filter/LocaleFilterTest.class
-com/i2i/dao/UserDaoTest.class
 com/i2i/service/impl/BaseManagerMockTestCase.class
 com/i2i/webapp/listener/StartupListenerTest.class
 com/i2i/webapp/controller/UpdatePasswordControllerTest.class

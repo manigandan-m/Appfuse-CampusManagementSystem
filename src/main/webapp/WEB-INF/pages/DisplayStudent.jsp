@@ -44,7 +44,9 @@
                     <tr><td>Date Of Birth :</td><td><c:out value="${searchStudent.getUser().getDateOfBirth()}"/></td></tr>
                     <tr><td>Gender :</td><td><c:out value="${searchStudent.getUser().getGender()}"/></td></tr>
                     <tr><td>Blood Group :</td><td><c:out value="${searchStudent.getUser().getBloodGroup()}"/></td></tr>
-                    <tr><td>Mobile Number:</td><td><c:out value="${searchStudent.getUser().getMobileNumber()}"/></td></tr>
+                    <tr><td>Email :</td><td><c:out value="${searchStudent.getUser().getEmail()}"/></td></tr>
+                    <tr><td>Phone Number:</td><td><c:out value="${searchStudent.getUser().getPhoneNumber()}"/></td></tr>
+                    <tr><td>Website:</td><td><c:out value="${searchStudent.getUser().getWebsite()}"/></td></tr>
                     <tr><td>Nationality:</td>    <td><c:out value="${searchStudent.getUser().getNationality()}"/></td></tr>
                     <tr><td>Religion:</td><td><c:out value="${searchStudent.getUser().getReligion()}"/></td></tr>
                     <tr><td>HouseNumber:</td><td><c:out value="${searchStudent.getUser().getAddress().getHouseNumber()}"/></td></tr>

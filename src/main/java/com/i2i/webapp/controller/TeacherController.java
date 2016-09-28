@@ -69,7 +69,7 @@ public class TeacherController  {
      *     JSP Page where the teacher details can be viewed
      */
     @RequestMapping(value = "/viewTeacher", method=RequestMethod.GET) 
-    public ModelAndView viewTeacher(@RequestParam("teacherId") int teacherId, BindingResult result) {               
+    public ModelAndView viewTeacher(@RequestParam("teacherId") int teacherId) {               
         ModelAndView modelView = new ModelAndView();  
         modelView.setViewName("SearchTeacher");
         try {
@@ -90,7 +90,7 @@ public class TeacherController  {
      *     JSP Page where the teacher details can be viewed
      */
     @RequestMapping(value = "/displayTeacher", method=RequestMethod.GET) 
-    public ModelAndView displayTeacher(@RequestParam("teacherId") int teacherId, BindingResult result) {               
+    public ModelAndView displayTeacher(@RequestParam("teacherId") int teacherId) {               
         ModelAndView modelView = new ModelAndView();  
         modelView.setViewName("DisplayTeacher");
         try {
@@ -126,7 +126,7 @@ public class TeacherController  {
      *     JSP Page where the user is redirected
      */
     @RequestMapping(value = "/deleteTeacher", method=RequestMethod.GET) 
-    public ModelAndView deleteTeacher(@RequestParam("teacherId") int teacherId, BindingResult result) {       
+    public ModelAndView deleteTeacher(@RequestParam("teacherId") int teacherId) {       
         ModelAndView modelView = new ModelAndView();
         try {                                                          
             teacherService.removeTeacherById(teacherId);
@@ -143,7 +143,7 @@ public class TeacherController  {
      *     id of teacher
      */
     @RequestMapping(value="/editTeacherDetails", method=RequestMethod.GET)
-    public String editTeacherDetails(@RequestParam("teacherId") int teacherId, ModelMap map, BindingResult result) {
+    public String editTeacherDetails(@RequestParam("teacherId") int teacherId, ModelMap map) {
     	try {
     	    Teacher teacher = teacherService.getTeacherById(teacherId);
     	    map.addAttribute("teacher",teacher);
@@ -166,7 +166,7 @@ public class TeacherController  {
      *     if there is failed or interrupted input output operations.
      */
     @RequestMapping(value = "/editTeacherById", method = RequestMethod.GET)
-    public String editTeacherForm(@RequestParam("teacherId") String id, ModelMap model, BindingResult result) throws ServletException, IOException {
+    public String editTeacherForm(@RequestParam("teacherId") String id, ModelMap model) throws ServletException, IOException {
     	 try {
     	     model.addAttribute("Teacher", teacherService.getTeacherById(Integer.parseInt(id)));
              return "EditTeacher";
@@ -194,7 +194,7 @@ public class TeacherController  {
      *     when a servlet related problem occurs.
      */
     @RequestMapping(value = "/editTeacher", method = RequestMethod.POST)
-    public String editTeacher(@ModelAttribute("Teacher") Teacher teacher, ModelMap message, BindingResult result) {  
+    public String editTeacher(@ModelAttribute("Teacher") Teacher teacher, ModelMap message) {  
         try {
         	teacherService.editTeacher(teacher);      
             message.addAttribute("Message", "Teacher Edited Successfully");

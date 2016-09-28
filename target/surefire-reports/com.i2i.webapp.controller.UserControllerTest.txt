@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.i2i.webapp.controller.UserControllerTest
--------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 36.358 sec - in com.i2i.webapp.controller.UserControllerTest

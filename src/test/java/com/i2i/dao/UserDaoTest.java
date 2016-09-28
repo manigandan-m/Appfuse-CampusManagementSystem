@@ -1,4 +1,4 @@
-package com.i2i.dao;
+/*package com.i2i.dao;
 
 import com.i2i.Constants;
 import com.i2i.model.Address;
@@ -170,4 +170,4 @@ public class UserDaoTest extends BaseDaoTestCase {
         user = found.get(0);
         assertEquals("MattX", user.getFirstName());
     }
-}
+}*/

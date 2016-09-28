@@ -8,6 +8,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
@@ -51,12 +53,13 @@ public class Teacher {
     @Column(name = "designation")
     String designation;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id") 
     @LazyCollection(LazyCollectionOption.FALSE)
     private User user;    
     
-    @OneToOne(mappedBy = "classCoordinator")
+    @OneToOne(mappedBy = "classCoordinator")    
     private Standard standardOfCoordinator;
     
     public int getTeacherId() {

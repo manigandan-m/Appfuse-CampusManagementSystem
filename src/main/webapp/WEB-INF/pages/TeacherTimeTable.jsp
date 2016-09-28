@@ -116,7 +116,7 @@
 </div>
 </c:if>      
 
-<c:if test="${null != mesage}">
+<c:if test="${null != message}">
               <c:out value="${message}"/>
           </c:if>
 </section>

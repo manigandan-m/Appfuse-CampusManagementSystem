@@ -77,7 +77,7 @@ public class StudentController  {
      *     JSP Page where the student details can be viewed
      */
     @RequestMapping(value = "/viewStudent", method=RequestMethod.GET) 
-    public ModelAndView viewStudent(@RequestParam("rollNumber") int studentId, BindingResult result) {               
+    public ModelAndView viewStudent(@RequestParam("rollNumber") int studentId) {               
         ModelAndView modelView = new ModelAndView();  
         modelView.setViewName("SearchStudent");
         try {          
@@ -98,7 +98,7 @@ public class StudentController  {
      *     JSP Page where the student details can be viewed
      */
     @RequestMapping(value = "/displayStudent", method=RequestMethod.GET) 
-    public ModelAndView displayStudent(@RequestParam("rollNumber") int studentId, BindingResult result) {               
+    public ModelAndView displayStudent(@RequestParam("rollNumber") int studentId) {               
         ModelAndView modelView = new ModelAndView();  
         modelView.setViewName("DisplayStudent");
         try {          
@@ -134,7 +134,7 @@ public class StudentController  {
      *     JSP Page where the user is redirected
      */
     @RequestMapping(value = "/deleteStudent", method=RequestMethod.GET)
-    public ModelAndView deleteStudent(@RequestParam("rollNumber") int studentId, BindingResult result) {       
+    public ModelAndView deleteStudent(@RequestParam("rollNumber") int studentId) {       
         ModelAndView modelView = new ModelAndView();
         try {                                                          
         	studentService.removeStudentById(studentId);
@@ -155,7 +155,7 @@ public class StudentController  {
      * @return
      */
     @RequestMapping(value="/editStudentDetails", method=RequestMethod.GET)
-    public String editTeacherDetails(@RequestParam("rollNumber") int studentId, ModelMap map, BindingResult result) {
+    public String editTeacherDetails(@RequestParam("rollNumber") int studentId, ModelMap map) {
     	try {
     	    Student student = studentService.getStudentById(studentId);    	    
     	    map.addAttribute("student",student);
@@ -178,7 +178,7 @@ public class StudentController  {
      *     if there is failed or interrupted input output operations.
      */
     @RequestMapping(value = "/editStudentById", method = RequestMethod.GET)
-    public String editStudentForm(@RequestParam("rollNumber") int rollNumber, ModelMap model, BindingResult result) {
+    public String editStudentForm(@RequestParam("rollNumber") int rollNumber, ModelMap model) {
     	try {
     	    model.addAttribute("Student", studentService.getStudentById(rollNumber));
     	    return "EditStudent";
@@ -206,7 +206,7 @@ public class StudentController  {
      *     when a servlet related problem occurs.
      */
     @RequestMapping(value = "/editStudent", method = RequestMethod.POST)
-    public String editStudent(@ModelAttribute("Student") Student student, ModelMap message, BindingResult result) {  
+    public String editStudent(@ModelAttribute("Student") Student student, ModelMap message) {  
         try {
         	studentService.editStudent(student);      
             message.addAttribute("Message", "Student Edited Successfully");

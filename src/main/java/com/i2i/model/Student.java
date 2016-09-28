@@ -9,13 +9,15 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.OneToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.JoinColumn;
 
-/*import com.i2i.model.User;
-import com.i2i.model.Standard;*/
+import com.i2i.model.User;
+import com.i2i.model.Standard;
 
 /**
  * Model class for Student
@@ -35,10 +37,11 @@ public class Student {
     @Column(name = "roll_number")
     private int rollNumber;
     
-    /*@OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id")   
     @LazyCollection(LazyCollectionOption.FALSE)
-    private User user;*/    
+    private User user;  
 
     @Column(name = "father_first_name")
     private String fatherFirstName;
@@ -61,9 +64,9 @@ public class Student {
     @Column(name = "admission_category")
     private String admissionCategory;
         
-    /*@OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "standard_id")  
-    private Standard standard;*/
+    private Standard standard;
     
     public void setRollNumber(int rollNumber) {
         this.rollNumber = rollNumber;
@@ -73,13 +76,13 @@ public class Student {
         return rollNumber;
     }
     
-    /*public void setUser(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
     public User getUser() {
         return user;
-    }*/    
+    }    
     
     public void setFatherFirstName(String fatherFirstName) {
         this.fatherFirstName = fatherFirstName;
@@ -137,13 +140,13 @@ public class Student {
         return admissionCategory;
     }
     
-    /*public void setStandard(Standard standard) {
+    public void setStandard(Standard standard) {
         this.standard = standard;
     }
 
     public Standard getStandard() {
         return standard;
-    }*/
+    }
     
     public Student () {
     }    
