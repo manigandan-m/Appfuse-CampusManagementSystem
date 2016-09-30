@@ -3,47 +3,49 @@
 <head>
     <title><fmt:message key="login.title"/></title>
     <meta name="menu" content="Login"/>
+    <title>Campus Management</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" type="text/css" href="css/style2.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" media="all" />
 </head>
-<body id="login">
+<body>
+<div class="container">
+			
+            <header>
+			
+				<h1>Login</h1>
+				</header>
 
-<form method="post" id="loginForm" action="<c:url value='/j_security_check'/>"
-    onsubmit="saveUsername(this);return validateForm(this)" class="form-signin" autocomplete="off">
-    <h2 class="form-signin-heading">
-        <fmt:message key="login.heading"/>
-    </h2>
+      <div  class="form">
+
+<form method="post" id="contactform" action="<c:url value='/j_security_check'/>"
+    onsubmit="saveUsername(this);return validateForm(this)"  autocomplete="off">
+   
 <c:if test="${param.error != null}">
     <div class="alert alert-danger alert-dismissable">
         <fmt:message key="errors.password.mismatch"/>
     </div>
 </c:if>
-    <input type="text" name="j_username" id="j_username" class="form-control"
-           placeholder="<fmt:message key="label.username"/>" required tabindex="1">
-    <input type="password" class="form-control" name="j_password" id="j_password" tabindex="2"
-           placeholder="<fmt:message key="label.password"/>" required>
-
-<c:if test="${appConfig['rememberMeEnabled']}">
-    <label for="rememberMe" class="checkbox">
-        <input type="checkbox" name="_spring_security_remember_me" id="rememberMe" tabindex="3"/>
-        <fmt:message key="login.rememberMe"/></label>
-</c:if>
-
-    <button type="submit" class="btn btn-lg btn-primary btn-block" name="login" tabindex="4">
-        <fmt:message key='button.login'/>
-    </button>
+    <p class="contact"><label for="username">Username</label></p> 
+    <input name="j_username" placeholder="username" data-validation="length alphanumeric" data-validation-length="min4" required ="required" tabindex="1" type="text"> 
+    
+    <br></br>       
+    <p class="contact"><label for="password">Password</label></p> 
+    <input name="j_password" placeholder="password" data-validation="length alphanumeric" data-validation-length="min4" required ="required" type="text">
+    <br></br>  
+    <input class="buttom" name="login" id="submit" tabindex="5" value="Login" type="submit"> 	
+    
 </form>
 
-<p>
-    <fmt:message key="login.signup">
-        <fmt:param><c:url value="/signup"/></fmt:param>
-    </fmt:message>
-</p>
+</div>      
+</div>
 
 <c:set var="scripts" scope="request">
 <%@ include file="/scripts/login.js"%>
 </c:set>
 
-<p><fmt:message key="login.passwordHint"/></p>
 
-<p><fmt:message key="updatePassword.requestRecoveryTokenLink"/></p>
 
 </body>

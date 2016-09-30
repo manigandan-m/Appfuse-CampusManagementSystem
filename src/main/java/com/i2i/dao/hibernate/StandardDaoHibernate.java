@@ -52,11 +52,6 @@ public class StandardDaoHibernate extends GenericDaoHibernate<Standard, Long> im
     public void insertStandard(Standard standard) throws DatabaseException {
     	Session session = getSession();
         try {     	
-            standard.getSubjects().get(0).setStandard(standard);
-            standard.getSubjects().get(1).setStandard(standard);
-            standard.getSubjects().get(2).setStandard(standard);
-            standard.getSubjects().get(3).setStandard(standard);
-            standard.getSubjects().get(4).setStandard(standard);
             session.save(standard);            
         } catch (HibernateException e) {
             throw new DatabaseException("Entered user is not added. Standard ID already exits..", e);

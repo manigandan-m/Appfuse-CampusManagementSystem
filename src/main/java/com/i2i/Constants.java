@@ -55,6 +55,11 @@ public final class Constants {
     public static final String USER_LIST = "userList";
 
     /**
+     * The request scope attribute that holds the user list
+     */
+    public static final int NUMBER_OF_PERIODS = 20;
+
+    /**
      * The request scope attribute for indicating a newly-registered user
      */
     public static final String REGISTERED = "registered";

@@ -16,6 +16,7 @@ import com.i2i.service.StandardService;
 import com.i2i.service.StudentService;
 import com.i2i.dao.PeriodSubjectDetailDao;
 import com.i2i.dao.StudentDao;
+import com.i2i.Constants;
 
 /**
  * <p>
@@ -103,7 +104,7 @@ public class PeriodSubjectDetailManagerImpl extends GenericManagerImpl<PeriodSub
     public void generatePeriods(List<Subject> periods) throws DatabaseException {
        	PeriodSubjectDetail periodSubjectDetail = new PeriodSubjectDetail();        
         int i = 1;			
-	while (i<= 20) {
+	while (i<= Constants.NUMBER_OF_PERIODS) {
 	    Subject subject = periods.get(i);				
 	    periodSubjectDetail.setPeriodId(i);				
 	    periodSubjectDetail.setSubjectCode(subject.getSubjectCode());				
@@ -141,7 +142,7 @@ public class PeriodSubjectDetailManagerImpl extends GenericManagerImpl<PeriodSub
     	List<PeriodSubjectDetail> periodSubjectDetails = periodSubjectDetailDao.retrievePeriodSubjectDetailsByTeacherId(teacherId);
     	PeriodSubjectDetail periodSubjectDetail = null;
     	int i = 0;			
-	while (i<= 20) {		    
+	while (i<= Constants.NUMBER_OF_PERIODS) {		    
 	    teacherPeriods.add(periodSubjectDetail);			
 	    i++;												
         }		

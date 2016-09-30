@@ -62,4 +62,6 @@ public interface UserService {
     void removeUser(String userId);
 
     User getUserById(Long id) throws DatabaseException;
+       
+    void updateUser(User user) throws DatabaseException;
 }

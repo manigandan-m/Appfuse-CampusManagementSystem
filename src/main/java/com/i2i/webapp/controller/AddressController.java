@@ -79,7 +79,6 @@ public class AddressController  {
     public String addAddress(@ModelAttribute("Address") Address address, ModelMap map, BindingResult result) {         
         try {          
             Long userId = address.getUser().getId();
-            System.out.println("In address controller:"+userId);
             User user = userManager.getUserById(userId);
             address.setUser(user);
             addressManager.addAddress(address);

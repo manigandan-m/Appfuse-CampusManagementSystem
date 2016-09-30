@@ -152,5 +152,5 @@ public interface UserManager extends GenericManager<User, Long> {
      * @param user
      * @throws DatabaseException
      */
-    void editUser(User user) throws DatabaseException;
+    void updateUser(User user) throws DatabaseException;
 }

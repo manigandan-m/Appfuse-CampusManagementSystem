@@ -136,7 +136,7 @@ public class UserDaoHibernate extends GenericDaoHibernate<User, Long> implements
      *     if there is an error in getting the object like NullPointerException,
      *     NumberFormatException, HibernateException
      */
-    public void editUser(User user) throws DatabaseException {
+    public void updateUser(User user) throws DatabaseException {
         Session session = getSession();
         try {
             session.update(user);

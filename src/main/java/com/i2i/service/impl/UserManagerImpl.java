@@ -245,7 +245,6 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
     /**
      * {@inheritDoc}
      */
-    @Override
     public User updatePassword(final String username, final String currentPassword, final String recoveryToken, 
                                final String newPassword, final String applicationUrl) throws UserExistsException {
         User user = getUserByUsername(username);
@@ -267,16 +266,16 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
         // or throw exception
         return null;
     }
-    
+
     /**
      * <p>
      * Gets the user by passing its id and accessing the database
      * </p>
      */
     public User getUserById(Long userId) throws DatabaseException {
-    	return userDao.findUserById(userId);
+        return userDao.findUserById(userId);
     }
-    
+   
     /**
      * <p>
      * Invokes the userDao method to edit the user details by passing the User class object
@@ -287,7 +286,8 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
      *     if there is an error in getting the object like NullPointerException,
      *     NumberFormatException
      */
-    public void editUser(User user) throws DatabaseException {
-        userDao.editUser(user);
+    public void updateUser(User user) throws DatabaseException {
+        userDao.updateUser(user);
     }
 }
+
