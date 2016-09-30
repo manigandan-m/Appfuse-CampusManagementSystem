@@ -68,30 +68,9 @@ public class PeriodSubjectDetailManagerImpl extends GenericManagerImpl<PeriodSub
      *     periods holds the list of periods with subject code       
      */
     public List<Subject> allocateSubjectToPeriod(List<Subject> subjects) {
-        List<Subject> periods = new ArrayList<Subject>();
-	periods.add(0,null);
-	periods.add(1,subjects.get(0));
-	periods.add(2,subjects.get(1));
-	periods.add(3,subjects.get(2));
-	periods.add(4,subjects.get(3));
-	periods.add(5,subjects.get(4));
-	periods.add(6,subjects.get(1));
-	periods.add(7,subjects.get(0));
-	periods.add(8,subjects.get(2));
-	periods.add(9,subjects.get(3));
-	periods.add(10,subjects.get(0));
-	periods.add(11,subjects.get(4));
-	periods.add(12,subjects.get(1));
-	periods.add(13,subjects.get(2));
-	periods.add(14,subjects.get(4));
-	periods.add(15,subjects.get(3));
-	periods.add(16,subjects.get(0));		
-	periods.add(17,subjects.get(1));		
-	periods.add(18,subjects.get(2));		
-	periods.add(19,subjects.get(3));		
-	periods.add(20,subjects.get(4));				
-	return periods;
-    }
+    	PeriodSubjectDetail periodSubjectDetail = new PeriodSubjectDetail(); 
+    	return (periodSubjectDetail.addSubjects(subjects));
+    }        
 	
     /**
      * Gets the list of periods with period id as index and generate the list of PeriodSubjectDetail objects then return it
